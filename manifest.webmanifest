@@ -1,0 +1,1 @@
+{"name":"نظام تسيير المخابر","short_name":"المخابر","description":"تطبيق تسيير مخابر المؤسسات التعليمية","start_url":"/LAB/","display":"standalone","background_color":"#fcf9f3","theme_color":"#fcf9f3","lang":"ar","scope":"/LAB/","dir":"rtl","icons":[{"src":"ministry-logo.png","sizes":"192x192","type":"image/png"},{"src":"ministry-logo.png","sizes":"512x512","type":"image/png"}]}
