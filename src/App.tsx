@@ -113,7 +113,7 @@ export default function App() {
         <SchoolProvider>
           <Router>
             <OfflineBanner />
-            {connectionError && (
+            {user && connectionError && (
               <div className="fixed bottom-4 right-4 z-[100] bg-error text-on-error px-6 py-4 rounded-2xl shadow-2xl flex flex-col gap-3 animate-bounce max-w-sm">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-black">{connectionError}</span>
