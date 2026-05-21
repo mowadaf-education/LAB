@@ -16,7 +16,7 @@ service cloud.firestore {
     }
 
     function isAdmin() {
-      return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'Admin';
+      return isSignedIn() && request.auth.token.admin == true;
     }
 
     function isValidId(id) {
@@ -121,6 +121,15 @@ service cloud.firestore {
           'safety_incidents'
         ])
       );
+    }
+
+    // Schools Database
+    match /schools/{id} {
+      allow read: if isSignedIn();
+    }
+    
+    match /school_metadata/directorates {
+      allow read: if isSignedIn();
     }
 
     // Global Collections

@@ -6,7 +6,6 @@ import { doc, getDoc, setDoc, query, where, getDocs, serverTimestamp, orderBy, o
 import { auth, db, handleFirestoreError, OperationType, getUserCollection } from '../firebase';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
-import { SCHOOL_DB } from '../data/schools';
 import { useTimeSlots } from '../hooks/useTimeSlots';
 import TimeSlotManager from '../components/TimeSlotManager';
 import ClassPicker from '../components/ClassPicker';
@@ -153,18 +152,26 @@ export default function DailyReport() {
           let directorateName = data.directorate || '';
           let schoolName = data.school || '';
 
-          // Resolve names if they are codes
-          if (data.directorate && SCHOOL_DB[data.directorate]) {
-            directorateName = SCHOOL_DB[data.directorate].name;
-            
-            if (data.commune && data.cycle && data.school) {
-              const commune = SCHOOL_DB[data.directorate].communes[data.commune];
-              if (commune) {
-                const school = commune.cycles[data.cycle]?.find((s: any) => s.code === data.school);
-                if (school) {
-                  schoolName = `${data.cycle} ${school.name} - ${commune.name}`;
+          // Resolve names from Firestore if they are codes
+          if (data.directorate) {
+            try {
+              const dirDoc = await getDoc(doc(db, 'schools', data.directorate));
+              if (dirDoc.exists()) {
+                const dirData = dirDoc.data();
+                directorateName = dirData.name;
+                
+                if (data.commune && data.cycle && data.school) {
+                  const commune = dirData.communes[data.commune];
+                  if (commune) {
+                    const school = commune.cycles[data.cycle]?.find((s: any) => s.code === data.school);
+                    if (school) {
+                      schoolName = `${data.cycle} ${school.name} - ${commune.name}`;
+                    }
+                  }
                 }
               }
+            } catch (err) {
+              console.error('Error fetching school lookup data:', err);
             }
           }
 

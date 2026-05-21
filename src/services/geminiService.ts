@@ -1,6 +1,21 @@
-import { httpsCallable } from 'firebase/functions';
-import { functions } from '../firebase';
 import { Type } from "@google/genai";
+
+async function callGeminiAPI(reqBody: any) {
+  const res = await fetch('/api/gemini', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(reqBody)
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.error || 'Gemini API failed');
+  }
+  const data = await res.json();
+  return { data: { text: data.text } };
+}
+
+const functions = null as any;
+const httpsCallable = (f: any, n: string) => callGeminiAPI;
 
 export interface ChemicalIntelligence {
   nameEn: string;

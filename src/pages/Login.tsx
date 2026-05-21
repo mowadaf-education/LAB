@@ -68,7 +68,7 @@ export default function Login() {
             await setDoc(doc(db, 'users', user.uid), {
               uid: user.uid,
               email: user.email,
-              role: checkIsAdmin(user) ? 'Admin' : 'user',
+              role: (await checkIsAdmin(user)) ? 'Admin' : 'user',
               displayName: user.displayName || user.email?.split('@')[0] || 'مستخدم جديد',
               photoURL: user.photoURL || null,
               createdAt: new Date().toISOString()
@@ -173,7 +173,7 @@ export default function Login() {
         await setDoc(doc(db, 'users', user.uid), {
           uid: user.uid,
           email: user.email,
-          role: checkIsAdmin(user) ? 'Admin' : 'user',
+          role: (await checkIsAdmin(user)) ? 'Admin' : 'user',
           displayName: user.email?.split('@')[0] || 'مستخدم جديد',
           photoURL: user.photoURL || null,
           createdAt: new Date().toISOString()
@@ -263,7 +263,7 @@ export default function Login() {
           await setDoc(doc(db, 'users', user.uid), {
             uid: user.uid,
             email: user.email,
-            role: checkIsAdmin(user) ? 'Admin' : 'user',
+            role: (await checkIsAdmin(user)) ? 'Admin' : 'user',
             displayName: user.displayName || user.email?.split('@')[0] || 'مستخدم جديد',
             photoURL: user.photoURL || null,
             createdAt: new Date().toISOString()
@@ -392,7 +392,7 @@ export default function Login() {
           await setDoc(doc(db, 'users', user.uid), {
             uid: user.uid,
             email: user.email,
-            role: checkIsAdmin(user) ? 'Admin' : 'user',
+            role: (await checkIsAdmin(user)) ? 'Admin' : 'user',
             displayName: user.displayName || user.email?.split('@')[0] || 'مستخدم جديد',
             photoURL: user.photoURL || null,
             createdAt: new Date().toISOString()

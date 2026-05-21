@@ -138,6 +138,7 @@ export default function App() {
               {(!user || setupComplete) ? (
                 <Routes>
                 <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+                <Route path="/admin-setup" element={<Navigate to="/admin" replace />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/data-deletion" element={<DataDeletion />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />

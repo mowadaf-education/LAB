@@ -86,7 +86,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (auth.currentUser) {
-      setIsAdmin(checkIsAdmin(auth.currentUser));
+      checkIsAdmin(auth.currentUser).then(setIsAdmin);
     }
 
     const unsubReports = onSnapshot(getUserCollection(schoolId, 'reports'), (snap) => {

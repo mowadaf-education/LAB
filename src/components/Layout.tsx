@@ -45,7 +45,7 @@ import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 import ErrorBoundary from './ErrorBoundary';
 import { doc, getDoc, onSnapshot, query, where, setDoc } from 'firebase/firestore';
-import { db, getUserCollection, checkIsAdmin, ADMIN_EMAIL } from '../firebase';
+import { db, getUserCollection, checkIsAdmin } from '../firebase';
 import GlobalSearch from './GlobalSearch';
 import Breadcrumbs from './Breadcrumbs';
 import NotificationCenter from './NotificationCenter';
@@ -84,7 +84,7 @@ export default function Layout() {
 
   useEffect(() => {
     if (auth.currentUser) {
-      setIsAdmin(checkIsAdmin(auth.currentUser));
+      checkIsAdmin(auth.currentUser).then(setIsAdmin);
     }
   }, [auth.currentUser]);
 

@@ -46,7 +46,6 @@ import {
 import { doc, getDoc, setDoc, writeBatch, serverTimestamp, getDocFromServer } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import * as XLSX from 'xlsx';
-import { SCHOOL_DB } from '../data/schools';
 import { cn } from '../lib/utils';
 import LocationCard, { InstitutionSuggestion } from '../components/LocationCard';
 
@@ -90,6 +89,46 @@ export default function SettingsPage() {
   const [selectedCycle, setSelectedCycle] = useState('');
   const [selectedSchool, setSelectedSchool] = useState('');
   const [schoolAddress, setSchoolAddress] = useState('');
+  
+  // Data loaded from Firestore
+  const [dirList, setDirList] = useState<any[]>([]);
+  const [currentDirData, setCurrentDirData] = useState<any>(null);
+
+  useEffect(() => {
+    // Fetch directorates list once
+    const fetchMeta = async () => {
+      try {
+        const metaDoc = await getDoc(doc(db, 'school_metadata', 'directorates'));
+        if (metaDoc.exists()) {
+          setDirList(metaDoc.data().list || []);
+        }
+      } catch (e) {
+        console.error('Error fetching directorates metadata:', e);
+      }
+    };
+    fetchMeta();
+  }, []);
+
+  useEffect(() => {
+    // Fetch current directorate data whenever selectedDirectorate changes
+    const fetchDir = async () => {
+      if (!selectedDirectorate) {
+        setCurrentDirData(null);
+        return;
+      }
+      try {
+        const dirDoc = await getDoc(doc(db, 'schools', selectedDirectorate));
+        if (dirDoc.exists()) {
+          setCurrentDirData(dirDoc.data());
+        } else {
+          setCurrentDirData(null);
+        }
+      } catch (e) {
+        console.error('Error fetching directorate data from Firestore:', e);
+      }
+    };
+    fetchDir();
+  }, [selectedDirectorate]);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -210,57 +249,28 @@ export default function SettingsPage() {
     reader.readAsBinaryString(file);
   };
 
-  const handleInstitutionSelect = (suggestion: InstitutionSuggestion) => {
-    const normalizedSuggestion = suggestion.name.toLowerCase().trim();
-    
-    let bestMatch = null;
-    let maxScore = 0;
-
-    // Iterate through SCHOOL_DB to find the best match
-    for (const [dirId, dir] of Object.entries(SCHOOL_DB)) {
-      const dirName = dir.name.toLowerCase();
-      const dirHint = suggestion.directorate?.toLowerCase() || '';
-      const dirMatch = dirHint && (dirName.includes(dirHint) || dirHint.includes(dirName));
+  const handleInstitutionSelect = async (suggestion: InstitutionSuggestion) => {
+    try {
+      const response = await fetch('/api/schools/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ suggestion })
+      });
+      const { bestMatch } = await response.json();
       
-      for (const [comId, com] of Object.entries(dir.communes)) {
-        const comName = com.name.toLowerCase();
-        const comHint = suggestion.commune?.toLowerCase() || '';
-        const comMatch = comHint && (comName.includes(comHint) || comHint.includes(comName));
-
-        for (const [cycle, schools] of Object.entries(com.cycles)) {
-          const cycleHint = suggestion.cycle?.toLowerCase() || '';
-          const cycleMatch = cycleHint && (cycle.toLowerCase().includes(cycleHint) || cycleHint.includes(cycle.toLowerCase()));
-
-          for (const school of schools) {
-            const normalizedSchool = school.name.toLowerCase().trim();
-            let score = 0;
-            
-            if (normalizedSchool === normalizedSuggestion) score += 100;
-            else if (normalizedSchool.includes(normalizedSuggestion) || normalizedSuggestion.includes(normalizedSchool)) score += 50;
-            
-            if (dirMatch) score += 20;
-            if (comMatch) score += 20;
-            if (cycleMatch) score += 10;
-
-            if (score > maxScore) {
-              maxScore = score;
-              bestMatch = { dirId, comId, cycle, schoolCode: school.code };
-            }
-          }
+      if (bestMatch) {
+        setSelectedDirectorate(bestMatch.dirId);
+        setSelectedCommune(bestMatch.comId);
+        setSelectedCycle(bestMatch.cycle);
+        setSelectedSchool(bestMatch.schoolCode);
+        
+        // Also update address if we have it
+        if (suggestion.commune && suggestion.directorate) {
+          setSchoolAddress(`${suggestion.name}، ${suggestion.commune}، ${suggestion.directorate}`);
         }
       }
-    }
-
-    if (bestMatch && maxScore > 40) {
-      setSelectedDirectorate(bestMatch.dirId);
-      setSelectedCommune(bestMatch.comId);
-      setSelectedCycle(bestMatch.cycle);
-      setSelectedSchool(bestMatch.schoolCode);
-      
-      // Also update address if we have it
-      if (suggestion.commune && suggestion.directorate) {
-        setSchoolAddress(`${suggestion.name}، ${suggestion.commune}، ${suggestion.directorate}`);
-      }
+    } catch (err) {
+      console.error('Error finding school best match:', err);
     }
   };
 
@@ -953,8 +963,8 @@ export default function SettingsPage() {
                         }}
                       >
                         <option value="">اختر المديرية...</option>
-                        {Object.entries(SCHOOL_DB).map(([id, dir]: [string, any]) => (
-                          <option key={id} value={id}>{dir.name}</option>
+                        {dirList.map((dir: any) => (
+                          <option key={dir.id} value={dir.id}>{dir.name}</option>
                         ))}
                       </select>
                     </div>
@@ -963,7 +973,7 @@ export default function SettingsPage() {
                       <label className="text-sm font-black text-secondary mr-2">البلدية</label>
                       <select 
                         className="w-full bg-background border-2 border-transparent rounded-[20px] px-6 py-4 focus:ring-0 focus:border-primary transition-all font-bold appearance-none disabled:opacity-30"
-                        disabled={!selectedDirectorate}
+                        disabled={!selectedDirectorate || !currentDirData}
                         value={selectedCommune}
                         onChange={(e) => {
                           setSelectedCommune(e.target.value);
@@ -972,7 +982,7 @@ export default function SettingsPage() {
                         }}
                       >
                         <option value="">اختر البلدية...</option>
-                        {selectedDirectorate && Object.entries(SCHOOL_DB[selectedDirectorate].communes).map(([id, com]: [string, any]) => (
+                        {currentDirData && currentDirData.communes && Object.entries(currentDirData.communes).map(([id, com]: [string, any]) => (
                           <option key={id} value={id}>{com.name}</option>
                         ))}
                       </select>
@@ -982,7 +992,7 @@ export default function SettingsPage() {
                       <label className="text-sm font-black text-secondary mr-2">الطور التعليمي</label>
                       <select 
                         className="w-full bg-background border-2 border-transparent rounded-[20px] px-6 py-4 focus:ring-0 focus:border-primary transition-all font-bold appearance-none disabled:opacity-30"
-                        disabled={!selectedCommune}
+                        disabled={!selectedCommune || !currentDirData}
                         value={selectedCycle}
                         onChange={(e) => {
                           setSelectedCycle(e.target.value);
@@ -990,8 +1000,8 @@ export default function SettingsPage() {
                         }}
                       >
                         <option value="">اختر الطور...</option>
-                        {selectedDirectorate && selectedCommune && 
-                          Object.keys(SCHOOL_DB[selectedDirectorate].communes[selectedCommune].cycles).map((cycle) => (
+                        {currentDirData && currentDirData.communes && currentDirData.communes[selectedCommune] && 
+                          Object.keys(currentDirData.communes[selectedCommune].cycles).map((cycle) => (
                             <option key={cycle} value={cycle}>{cycle}</option>
                           ))
                         }
@@ -1002,13 +1012,13 @@ export default function SettingsPage() {
                       <label className="text-sm font-black text-secondary mr-2">المؤسسة التعليمية</label>
                       <select 
                         className="w-full bg-background border-2 border-transparent rounded-[20px] px-6 py-4 focus:ring-0 focus:border-primary transition-all font-bold appearance-none disabled:opacity-30"
-                        disabled={!selectedCycle}
+                        disabled={!selectedCycle || !currentDirData}
                         value={selectedSchool}
                         onChange={(e) => setSelectedSchool(e.target.value)}
                       >
                         <option value="">اختر المؤسسة...</option>
-                        {selectedDirectorate && selectedCommune && selectedCycle && 
-                          SCHOOL_DB[selectedDirectorate].communes[selectedCommune].cycles[selectedCycle].map((sch: any) => (
+                        {currentDirData && currentDirData.communes && currentDirData.communes[selectedCommune] && currentDirData.communes[selectedCommune].cycles[selectedCycle] && 
+                          currentDirData.communes[selectedCommune].cycles[selectedCycle].map((sch: any) => (
                             <option key={sch.code} value={sch.code}>{sch.name}</option>
                           ))
                         }
@@ -1032,7 +1042,7 @@ export default function SettingsPage() {
                   <div className="mt-12">
                     <LocationCard 
                       onSelect={handleInstitutionSelect} 
-                      communeName={selectedDirectorate && selectedCommune ? (SCHOOL_DB as any)[selectedDirectorate]?.communes[selectedCommune]?.name : undefined}
+                      communeName={currentDirData && currentDirData.communes && currentDirData.communes[selectedCommune] ? currentDirData.communes[selectedCommune].name : undefined}
                     />
                   </div>
                 </section>

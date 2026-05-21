@@ -59,10 +59,15 @@ if (typeof window !== 'undefined') {
 
 export const storage = getStorage(app);
 
-export const ADMIN_EMAIL = "faycalassoul@gmail.com";
-
-export function checkIsAdmin(user: any): boolean {
-  return user?.email === ADMIN_EMAIL && user?.emailVerified === true;
+export async function checkIsAdmin(user: any): Promise<boolean> {
+  if (!user) return false;
+  try {
+    const idTokenResult = await user.getIdTokenResult();
+    return !!idTokenResult.claims.admin;
+  } catch (error) {
+    console.error("Error checking admin claim:", error);
+    return false;
+  }
 }
 
 /**
