@@ -112,7 +112,7 @@ export default function Reports() {
           <div className="p-4 bg-surface-container-low rounded-[32px] shadow-xl border border-outline/5">
             <img 
               className="h-28 w-28 object-contain" 
-              src="https://upload.wikimedia.org/wikipedia/commons/d/d8/%D9%88%D8%B2%D8%A7%D8%B1%D8%A9_%D8%A7%D9%84%D8%AA%D8%B1%D8%A8%D9%8A%D8%A9_%D8%A7%D9%84%D9%88%D8%B7%D9%86%D9%8A%D8%A9.svg" 
+              src="/ministry.svg" 
               alt="Logo" 
               referrerPolicy="no-referrer"
             />

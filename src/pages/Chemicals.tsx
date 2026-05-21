@@ -57,15 +57,15 @@ interface Chemical {
 }
 
 const GHS_ICONS: Record<string, string> = {
-  'GHS01': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/GHS-pictogram-explos.svg/200px-GHS-pictogram-explos.svg.png',
-  'GHS02': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/GHS-pictogram-flamme.svg/200px-GHS-pictogram-flamme.svg.png',
-  'GHS03': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/GHS-pictogram-rondflam.svg/200px-GHS-pictogram-rondflam.svg.png',
-  'GHS04': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/GHS-pictogram-bottle.svg/200px-GHS-pictogram-bottle.svg.png',
-  'GHS05': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/GHS-pictogram-acid.svg/200px-GHS-pictogram-acid.svg.png',
-  'GHS06': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/GHS-pictogram-skull.svg/200px-GHS-pictogram-skull.svg.png',
-  'GHS07': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/GHS-pictogram-exclam.svg/200px-GHS-pictogram-exclam.svg.png',
-  'GHS08': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/GHS-pictogram-silhouette.svg/200px-GHS-pictogram-silhouette.svg.png',
-  'GHS09': 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/GHS-pictogram-pollut.svg/200px-GHS-pictogram-pollut.svg.png',
+  'GHS01': '/ghs/GHS01.png',
+  'GHS02': '/ghs/GHS02.png',
+  'GHS03': '/ghs/GHS03.png',
+  'GHS04': '/ghs/GHS04.png',
+  'GHS05': '/ghs/GHS05.png',
+  'GHS06': '/ghs/GHS06.png',
+  'GHS07': '/ghs/GHS07.png',
+  'GHS08': '/ghs/GHS08.png',
+  'GHS09': '/ghs/GHS09.png',
 };
 
 const GHS_LABELS: Record<string, string> = {
