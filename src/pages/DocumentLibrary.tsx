@@ -24,7 +24,7 @@ import { useNavigate } from 'react-router-dom';
 import { db, getUserCollection, handleFirestoreError, OperationType } from '../firebase';
 import { onSnapshot, query, addDoc, serverTimestamp, orderBy, deleteDoc, doc } from 'firebase/firestore';
 import { cn } from '../lib/utils';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 
 interface UserDoc {
   id: string;
@@ -123,7 +123,7 @@ export default function DocumentLibrary() {
 
   return (
     <div className="space-y-12 max-w-7xl mx-auto px-6 pb-32 rtl" dir="rtl">
-      <Breadcrumbs />
+      
 
       <header className="space-y-4">
         <div className="flex items-center gap-4">

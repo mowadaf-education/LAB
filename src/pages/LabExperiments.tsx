@@ -26,7 +26,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { db, getUserCollection, handleFirestoreError, OperationType } from '../firebase';
 import { onSnapshot, query, addDoc, serverTimestamp, orderBy, getDocs, writeBatch, doc } from 'firebase/firestore';
 import { cn } from '../lib/utils';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 import { ensureApiKey, analyzeExperiment } from '../services/geminiService';
 import { logActivity, LogAction, LogModule } from '../services/loggingService';
 import * as XLSX from 'xlsx';
@@ -199,7 +199,7 @@ export default function LabExperiments() {
 
   return (
     <div className="space-y-10 max-w-7xl mx-auto px-6 pb-32 rtl" dir="rtl">
-      <Breadcrumbs />
+      
       
       <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div className="space-y-1">

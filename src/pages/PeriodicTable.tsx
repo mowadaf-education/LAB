@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { elements, ElementData } from '../constants/elements';
 import { motion, AnimatePresence } from 'motion/react';
 import { Info, Maximize2, X, FlaskConical, Atom, Binary, Scale } from 'lucide-react';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 
 const categoryColors: Record<string, string> = {
   "diatomic nonmetal": "bg-blue-200 text-blue-900 border-blue-300",
@@ -42,7 +42,7 @@ export default function PeriodicTable() {
 
   return (
     <div className="p-8 pb-32 max-w-[1400px] mx-auto font-sans" dir="rtl">
-      <Breadcrumbs />
+      
       
       <header className="mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
         <div>

@@ -6,7 +6,7 @@ import { LayoutDashboard, CheckSquare, Square, Printer, FlaskConical, Monitor } 
 import { motion, AnimatePresence } from 'motion/react';
 import { QRCodeSVG } from 'qrcode.react';
 import logo from '/ministry-logo.png';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 
 interface Equipment {
   id: string;
@@ -163,7 +163,7 @@ export default function QRPrintCenter() {
       </style>
 
       <div className="no-print">
-        <Breadcrumbs />
+        
         
         <header className="relative flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-8">
           <div>

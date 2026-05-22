@@ -17,7 +17,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '../lib/utils';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 import { findSmartForm, ensureApiKey } from '../services/geminiService';
 import { PDFService } from '../services/pdfService';
 
@@ -105,7 +105,7 @@ export default function SmartForms() {
 
   return (
     <div className="max-w-7xl mx-auto px-6 pb-32 rtl" dir="rtl">
-      <Breadcrumbs />
+      
       
       <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
         <div className="space-y-1">

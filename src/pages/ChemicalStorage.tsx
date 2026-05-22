@@ -4,7 +4,7 @@ import { db, getUserCollection } from '../firebase';
 import { getDocs, query } from 'firebase/firestore';
 import { analyzeChemicalStorage, StorageAnalysisResult } from '../services/geminiService';
 import { ShieldCheck, ShieldAlert, Sparkles, Printer, AlertTriangle, Info, MapPin } from 'lucide-react';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 import StorageMap from '../components/StorageMap';
 
 export default function ChemicalStorageMatrix() {
@@ -108,7 +108,7 @@ export default function ChemicalStorageMatrix() {
       </style>
 
       <div className="no-print">
-        <Breadcrumbs />
+        
         
         <header className="relative flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-8">
           <div>

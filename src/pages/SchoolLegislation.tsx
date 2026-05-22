@@ -9,7 +9,7 @@ import {
   FileSignature, ChevronLeft, ChevronRight 
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 
 export interface LegislationDoc {
   id: string;
@@ -192,7 +192,7 @@ export default function SchoolLegislation() {
 
   return (
     <div className="p-8 pb-32 max-w-7xl mx-auto">
-      <Breadcrumbs />
+      
       
       <header className="relative flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-8">
         <div>

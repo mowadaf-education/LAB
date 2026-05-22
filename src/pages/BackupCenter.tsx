@@ -18,7 +18,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { db, getUserCollection, handleFirestoreError, OperationType } from '../firebase';
 import { getDocs, writeBatch, doc } from 'firebase/firestore';
 import { cn } from '../lib/utils';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 
 const COLLECTIONS_TO_BACKUP = [
   'equipment',
@@ -131,7 +131,7 @@ export default function BackupCenter() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 pb-32 rtl space-y-12" dir="rtl">
-      <Breadcrumbs />
+      
 
       <header className="space-y-4">
         <div className="flex items-center gap-4">

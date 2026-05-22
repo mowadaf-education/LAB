@@ -11,7 +11,7 @@ import {
   Scale
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 
 export default function LabCalculators() {
   const [molarity, setMolarity] = useState({ mass: '', volume: '', molarMass: '', concentration: '' });
@@ -54,7 +54,7 @@ export default function LabCalculators() {
 
   return (
     <div className="p-8 pb-32 max-w-7xl mx-auto font-sans" dir="rtl">
-      <Breadcrumbs />
+      
       
       <header className="mb-12">
         <h1 className="text-4xl font-extrabold text-primary mb-4 flex items-center gap-3">

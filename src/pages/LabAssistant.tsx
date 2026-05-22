@@ -18,7 +18,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { chatWithLabAssistant, analyzeLabImage } from '../services/geminiService';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 
 interface Message {
   role: 'user' | 'model';
@@ -102,7 +102,7 @@ export default function LabAssistant() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-140px)] max-w-5xl mx-auto px-6 rtl" dir="rtl">
-      <Breadcrumbs />
+      
       
       <header className="flex justify-between items-center mb-6 shrink-0">
         <div className="flex items-center gap-4">

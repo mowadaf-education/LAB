@@ -30,7 +30,7 @@ import { onSnapshot, query, addDoc, serverTimestamp, updateDoc, doc, orderBy, ge
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, addMonths, subMonths, isToday } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { cn } from '../lib/utils';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 import { analyzeMaintenance, MaintenanceInsight } from '../services/geminiService';
 import { Link } from 'react-router-dom';
 
@@ -210,7 +210,7 @@ export default function Maintenance() {
 
   return (
     <div className="p-4 md:p-8 space-y-8 max-w-7xl mx-auto rtl" dir="rtl">
-      <Breadcrumbs />
+      
 
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-1">

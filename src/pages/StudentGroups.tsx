@@ -4,7 +4,7 @@ import { getUserCollection } from '../firebase';
 import { addDoc, getDocs, query, orderBy, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { Users, Grid, Plus, Trash2, Calendar, User, MessageSquare, CheckCircle2, ShieldAlert, Play, Square, Beaker, Save, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 
 interface StudentClass {
   id: string;
@@ -161,7 +161,7 @@ export default function StudentGroups() {
 
   return (
     <div className="p-8 pb-32 max-w-7xl mx-auto">
-      <Breadcrumbs />
+      
       
       <header className="relative flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-8">
         <div>

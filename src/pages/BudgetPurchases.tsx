@@ -8,7 +8,7 @@ import {
   TrendingDown, TrendingUp, Save, X, Phone, Mail, MapPin 
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import Breadcrumbs from '../components/Breadcrumbs';
+
 
 interface Supplier {
   id: string;
@@ -191,7 +191,7 @@ export default function BudgetPurchases() {
 
   return (
     <div className="p-8 pb-32 max-w-7xl mx-auto">
-      <Breadcrumbs />
+      
       
       <header className="relative flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-8">
         <div>
