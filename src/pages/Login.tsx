@@ -14,7 +14,7 @@ import {
 } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { auth, db, checkIsAdmin } from '../firebase';
-import { Beaker, Lock as LockIcon, User, Eye, EyeOff, ArrowLeft, ShieldCheck, Globe, UserPlus, Facebook } from 'lucide-react';
+import { Beaker, Lock as LockIcon, User, Eye, EyeOff, ArrowLeft, ShieldCheck, Globe, UserPlus, Facebook, Sun, Moon } from 'lucide-react';
 import logo from '/ministry-logo.png';
 import { cn } from '../lib/utils';
 
@@ -38,6 +38,24 @@ export default function Login() {
   const [isInAppBrowser, setIsInAppBrowser] = useState(false);
   const [pendingCred, setPendingCred] = useState<any>(null);
   const [linkingMessage, setLinkingMessage] = useState<string | null>(null);
+
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark' || 
+        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     // Dynamic loading of reCAPTCHA Enterprise
@@ -496,23 +514,23 @@ export default function Login() {
         {/* Background Mosaic Overlay */}
         <div className="absolute inset-0 opacity-40 z-0 p-4">
           <div className="mosaic-container">
-            <div className="rounded-xl overflow-hidden shadow-lg bg-surface-variant col-span-2 row-span-1">
-              <img className="w-full h-full object-cover" data-alt="Science laboratory with microscopes and glass tubes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3v04XZdR-wrr-yl9jm1TwqSzZh1tB2Q_b2seHi78Pot77MsMKUR_IfLse_SOAchzoJnl9_QyxHYtsxc5wu26u4ADOAzYFgqR8gRymImjjvvT-bDPHvCmLBkeobQG0AcqNGd6vHpntlBztJ221uKcrlHe0ThJ4WLglF7F8BkpxNeqIax36ScCmlka5P905m6gshhHSbmcp0nBeSVUvuNGqULHF4tyOFKqEbn_cMXOMT09UhVajKnS6za7T-T9mTkBJ2In2H4Gg4-4" referrerPolicy="no-referrer" />
-            </div>
-            <div className="rounded-xl overflow-hidden shadow-lg bg-surface-variant">
-              <img className="w-full h-full object-cover" data-alt="Close up of chemical reaction in test tube" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK-3rZyvrCfdVxOKdAv8bR1wO3FG3vheJUtH9H5Ex6zmXLnSMqqvrqhqLhZXr-6EEUg-clmsiUqfrTsT1ayjC0cfDHAklAFpmlB_La9uV4hegLKAEzWA_Scf12WX5ykbgzB2227HIREHQucl3l3EeUV2SL95ZqqHw9nCMheHY__u9TTVVC9hBrFiiw9R880kRD_glE_Pjt0M0CNkxq6dYlHNg7u1HGqhuSpviq15SPp7kowsWvvkdEoHYO8CnbbPB1gy4UJ5uS9-A" referrerPolicy="no-referrer" />
-            </div>
-            <div className="rounded-xl overflow-hidden shadow-lg bg-surface-variant">
-              <img className="w-full h-full object-cover" data-alt="Modern high school laboratory environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtQbiu329wvWJUIPV7-dHHkB8scwVlkjW0CxzAb_jkwQ6-Jqn63-dlCNl0PIsaUnxNqzFMH9zmVdgX-RtWbyQKYuFzHRViVJn_UlEhK6C2r6147LwlOE-LDSfsF6-3rO1m8ZGQmjw3w5iq5CzTZaOLjBIom_GHbBVKM-FZDGeaL6tVwLDqp7x72FMHHSedgxS_qQRRgpORxw5gS5pl43CsOClujg6hvVlI6CaFojkEIwLaHIA2svKzfvfdOhanjdfvx6qXY3yBcjs" referrerPolicy="no-referrer" />
-            </div>
-            <div className="rounded-xl overflow-hidden shadow-lg bg-surface-variant">
-              <img className="w-full h-full object-cover" data-alt="Scientist working with laboratory equipment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPFGMsi61n29fUlKz-g9O3v3RDqIUPJA-Hd-3Eu1vZT6fsKe2dpWiZ7MV1j0aH8pGMUtKYujyGg7yo14gbULLD8FmKF7ag0U5RHVEmXsc0-SeQNOp9JnqjZbQQBPm2DpU7SYOV219H8rSwcmew0izuW-mE8sbqaY5a5URddDsyPQSPBpaQ6Jo9iOTwSDEdGfgCNZQHKxaiBQCz14goom5XhB_lg9h57mvcwYPBjAvGFjRkoFxUUx7K_wexj5aaQKzt7e0fzITXWS8" referrerPolicy="no-referrer" />
-            </div>
-            <div className="rounded-xl overflow-hidden shadow-lg bg-surface-variant">
-              <img className="w-full h-full object-cover" data-alt="Algerian school science lab workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuu21W2NVmM2_12ChkPiiiSFralvib0a8U_lpsxVaAOqbHci_xBeb_JzUYm5XLunM43cDfllelPvxX21ruhld2KlTUw8FSodp75yDnZJzIIlbv6blmsbjAaJu19MR8mfi4mkJ-073-m-tswkhO1H2z5du4QRJq_lTCwpirBx8j-3zaZds9KBDsILc4gumE1CcSVNFpmJ0c6dju6Es6rRVo4hqT49j8sgYAEeY1qdkH9a0CkPRigO2YkJrX33Zkvautpubi87g-m7Y" referrerPolicy="no-referrer" />
-            </div>
             <div className="rounded-xl overflow-hidden shadow-lg bg-surface-variant col-span-3">
-              <img className="w-full h-full object-cover" data-alt="Wide shot of a sterile chemistry lab" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKE46oqP3asuAvBjP-Hbs9AphtR1hQhiUXym8bmOEbovjI2BcbP075NU0xdSxp50PTKaBRjjHn2tO1ozFJVbbq5GpO8GPcAERHD_1KFsRVd_M2IynoapJLG6EskcDp2411e4OfDTd5C4-A9CHkE2f0MV-JA5U3kV0hKrkoknyJ-T-Qo9aKT1jeY8PQ5v3iQ2C0U7auDz0zTqzkG3Zyh8sjQNlmVa1n_XLRzz7DzE34FdleIFAZmGjCr1H89O7ZD8hZfTfvygnhaZU" referrerPolicy="no-referrer" />
+              <img className="w-full h-full object-cover" data-alt="Wide shot of a sterile chemistry lab" src="/images/login/lab_1.jpg" style={{ opacity: 1, transition: 'opacity 0.8s' }} referrerPolicy="no-referrer" />
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg bg-surface-variant col-span-2 row-span-1">
+              <img className="w-full h-full object-cover" data-alt="Science laboratory with microscopes and glass tubes" src="/images/login/lab_2.jpg" referrerPolicy="no-referrer" />
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg bg-surface-variant">
+              <img className="w-full h-full object-cover" data-alt="Close up of chemical reaction in test tube" src="/images/login/lab_3.jpg" referrerPolicy="no-referrer" />
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg bg-surface-variant">
+              <img className="w-full h-full object-cover" data-alt="Modern high school laboratory environment" src="/images/login/lab_4.jpg" referrerPolicy="no-referrer" />
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg bg-surface-variant">
+              <img className="w-full h-full object-cover" data-alt="Scientist working with laboratory equipment" src="/images/login/lab_5.jpg" referrerPolicy="no-referrer" />
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg bg-surface-variant">
+              <img className="w-full h-full object-cover" data-alt="Algerian school science lab workspace" src="/images/login/lab_6.jpg" referrerPolicy="no-referrer" />
             </div>
           </div>
         </div>
@@ -553,6 +571,15 @@ export default function Login() {
 
       {/* Right Panel: Auth Form (30%) */}
       <main className="w-full lg:w-[30%] bg-surface-container-low relative flex flex-col items-center justify-center p-4 md:p-8 lg:p-10 overflow-y-auto">
+        {/* Theme Toggle */}
+        <button 
+          onClick={() => setIsDarkMode(!isDarkMode)}
+          className="absolute top-4 left-4 p-3 bg-surface border border-outline/10 hover:bg-secondary-container/50 rounded-full text-primary transition-all z-20 shadow-sm"
+          title={isDarkMode ? 'الوضع النهاري' : 'الوضع الليلي'}
+        >
+          {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
+
         {/* Decorative Blobs */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -mr-48 -mt-48"></div>
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/10 rounded-full blur-[100px] -ml-40 -mb-40"></div>
