@@ -486,7 +486,7 @@ export default function Dashboard() {
       )}
 
       {/* Header */}
-      <header className="relative flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-4">
+      <header className="relative flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-4 sm:gap-8 mb-4">
         <div className="text-right space-y-3 relative z-10">
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full text-primary text-xs font-black uppercase tracking-widest mb-2">
             <LayoutDashboard size={14} />
@@ -547,7 +547,7 @@ export default function Dashboard() {
       {/* Alerts Bar */}
       {(counts.lowStock > 0 || counts.brokenEquip > 0 || expiringItems.length > 0) && (
         <section className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-4 sm:gap-8">
             {counts.lowStock > 0 && (
               <motion.div 
                 initial={{ opacity: 0, x: 20 }}
@@ -605,7 +605,7 @@ export default function Dashboard() {
               <div className="absolute top-0 right-0 p-8 opacity-5 text-orange-900">
                 <ShieldAlert size={120} />
               </div>
-              <div className="flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-8 relative z-10">
                 <div className="flex items-center gap-6">
                   <div className="w-16 h-16 rounded-[24px] bg-orange-600 text-white flex items-center justify-center shadow-ambient shrink-0">
                     <Bell size={28} />
@@ -637,7 +637,7 @@ export default function Dashboard() {
       )}
 
       {/* Stats Strip */}
-      <section className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+      <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4 sm:gap-8">
         {stats.map((stat, i) => {
           const Icon = stat.icon;
           return (
@@ -681,7 +681,7 @@ export default function Dashboard() {
             <h2 className="text-2xl font-black text-primary tracking-tight">آخر النشاطات</h2>
             <div className="flex-1 h-px bg-outline/10"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-4 sm:gap-8">
             {recentReports.map((report, i) => (
               <motion.div
                 key={report.id}
@@ -725,7 +725,7 @@ export default function Dashboard() {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-4 sm:gap-8">
           {modules.map((mod, i) => {
             const Icon = mod.icon;
             return (

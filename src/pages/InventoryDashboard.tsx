@@ -141,7 +141,7 @@ export default function InventoryDashboard() {
   return (
     <div className="space-y-12 max-w-7xl mx-auto px-6 pb-24 rtl font-sans" dir="rtl">
       {/* Header */}
-      <header className="relative flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-4">
+      <header className="relative flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-8 mb-4">
         <div className="text-right space-y-3 relative z-10">
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full text-primary text-[0.6875rem] font-black uppercase tracking-widest mb-2">
             <Database size={14} />
@@ -172,7 +172,7 @@ export default function InventoryDashboard() {
       </header>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
         {inventoryModules.map((mod, i) => {
           const Icon = mod.icon;
           return (

@@ -55,7 +55,12 @@ import logo from '/ministry-logo.png';
 export default function Layout() {
   const location = useLocation();
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 1024;
+    }
+    return true;
+  });
 
   useEffect(() => {
     const syncUserProfile = async () => {
@@ -235,10 +240,23 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen bg-surface flex rtl text-right" dir="rtl">
+      {/* Mobile Overlay */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsSidebarOpen(false)}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"
+          />
+        )}
+      </AnimatePresence>
+
       {/* SideNavBar */}
       <aside className={cn(
         "fixed right-0 top-0 h-full z-40 flex flex-col bg-surface-container-low transition-all duration-300 no-print",
-        isSidebarOpen ? "w-72" : "w-20"
+        isSidebarOpen ? "translate-x-0 w-72" : "translate-x-full lg:translate-x-0 lg:w-20"
       )}>
         <div className="p-6 flex flex-col items-center gap-2">
           <img 
@@ -385,25 +403,26 @@ export default function Layout() {
 
       {/* Main Content Area */}
       <div className={cn(
-        "flex-1 flex flex-col transition-all duration-300 print:mr-0",
-        isSidebarOpen ? "mr-72" : "mr-20"
+        "flex-1 flex flex-col transition-all duration-300 print:mr-0 min-w-0 w-full",
+        isSidebarOpen ? "lg:mr-72" : "lg:mr-20"
       )}>
         {/* TopAppBar */}
-        <header className="h-16 bg-surface/80 backdrop-blur-md sticky top-0 z-30 flex justify-between items-center px-8 no-print">
-          <div className="flex items-center gap-4">
+        <header className="h-16 bg-surface/80 backdrop-blur-md sticky top-0 z-20 flex justify-between items-center px-4 md:px-8 no-print">
+          <div className="flex items-center gap-2 md:gap-4">
             <button 
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="p-2 hover:bg-secondary-container/50 rounded-full text-primary"
             >
-              {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+              <Menu size={20} className={cn("transition-transform", isSidebarOpen ? "hidden lg:block" : "")} />
+              <X size={20} className={cn("transition-transform", !isSidebarOpen ? "hidden lg:hidden" : "lg:hidden")} />
             </button>
-            <h2 className="text-lg font-bold text-primary">نظام تسيير المخابر</h2>
+            <h2 className="text-base md:text-lg font-bold text-primary truncate max-w-[150px] sm:max-w-none">نظام تسيير المخابر</h2>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 md:gap-6">
             <button 
               onClick={() => setIsDarkMode(!isDarkMode)}
-              className="p-2 hover:bg-secondary-container/50 rounded-full text-primary transition-all"
+              className="p-2 hover:bg-secondary-container/50 rounded-full text-primary transition-all hidden sm:block"
               title={isDarkMode ? 'الوضع النهاري' : 'الوضع الليلي'}
             >
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
@@ -483,7 +502,7 @@ export default function Layout() {
           </div>
         </header>
 
-        <main role="main" aria-label="المحتوى الرئيسي" className="p-8 print:p-0">
+        <main role="main" aria-label="المحتوى الرئيسي" className="p-4 md:p-8 print:p-0 overflow-x-hidden">
           <Breadcrumbs />
           <ErrorBoundary>
             <Suspense fallback={

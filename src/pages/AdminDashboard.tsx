@@ -273,7 +273,7 @@ export default function AdminDashboard() {
       </Helmet>
 
       {/* Header */}
-      <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
+      <header className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
         <div className="text-right space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary text-on-primary rounded-full text-[0.625rem] font-black uppercase tracking-widest mb-2 shadow-sm">
             <ShieldCheck size={12} />
@@ -360,7 +360,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Search & Filter */}
-      <section className="bg-surface p-4 rounded-[24px] border border-outline/10 shadow-sm flex flex-col md:flex-row items-center gap-4">
+      <section className="bg-surface p-4 rounded-[24px] border border-outline/10 shadow-sm flex flex-col sm:flex-row items-center gap-4">
         <div className="relative flex-1 w-full group">
           <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-on-surface/40 group-focus-within:text-primary transition-colors">
             <Search size={20} />
@@ -404,7 +404,7 @@ export default function AdminDashboard() {
                 {/* Export Card */}
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                  className="bg-surface p-8 rounded-[32px] border border-outline/5 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6"
+                  className="bg-surface p-8 rounded-[32px] border border-outline/5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center border border-emerald-100">
@@ -438,7 +438,7 @@ export default function AdminDashboard() {
                       <p className="text-sm font-bold text-on-surface/50">إرسال تنبيه أو رسالة لجميع المستخدمين النشطين في المنصة</p>
                     </div>
                   </div>
-                  <div className="flex flex-col md:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4">
                     <input 
                       type="text" 
                       placeholder="اكتب رسالة الإشعار هنا..."
@@ -472,7 +472,7 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
                      <div>
                        <label className="block text-sm font-black text-on-surface/70 mb-2">مفتاح الوصول JSON</label>
                        <textarea
@@ -521,7 +521,7 @@ export default function AdminDashboard() {
                 {/* DB Migration Card */}
                 <motion.div 
                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-                   className="bg-surface p-8 rounded-[32px] border border-outline/5 shadow-sm flex flex-col md:flex-row items-center gap-8"
+                   className="bg-surface p-8 rounded-[32px] border border-outline/5 shadow-sm flex flex-col sm:flex-row items-center gap-4 sm:gap-8"
                 >
                   <div className="flex-1 space-y-2">
                     <div className="flex items-center gap-3">
@@ -562,7 +562,7 @@ export default function AdminDashboard() {
               >
                 <div className="absolute top-0 left-0 w-2 h-full bg-primary/10 group-hover:bg-primary transition-all" />
                 
-                <div className="flex flex-col xl:flex-row items-center lg:items-start gap-8">
+                <div className="flex flex-col xl:flex-row items-center lg:items-start gap-4 sm:gap-8">
                   {/* User Avatar & Basic Info */}
                   <div className="flex items-center gap-6 flex-1 w-full">
                     <div className="relative">
