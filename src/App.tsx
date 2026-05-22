@@ -30,6 +30,11 @@ const Settings = React.lazy(() => import('./pages/Settings'));
 const InventoryDashboard = React.lazy(() => import('./pages/InventoryDashboard'));
 const Maintenance = React.lazy(() => import('./pages/Maintenance'));
 const PedagogicalDashboard = React.lazy(() => import('./pages/PedagogicalDashboard'));
+const SafetyDashboard = React.lazy(() => import('./pages/SafetyDashboard'));
+const ScientificDashboard = React.lazy(() => import('./pages/ScientificDashboard'));
+const ManagementDashboard = React.lazy(() => import('./pages/ManagementDashboard'));
+const ImportantLinks = React.lazy(() => import('./pages/ImportantLinks'));
+const ProfessionalExams = React.lazy(() => import('./pages/ProfessionalExams'));
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 const DataDeletion = React.lazy(() => import('./pages/DataDeletion'));
 const TermsOfService = React.lazy(() => import('./pages/TermsOfService'));
@@ -152,6 +157,10 @@ export default function App() {
                   <Route path="document-library" element={<DocumentLibrary />} />
                 <Route path="inventory" element={<InventoryDashboard />} />
                 <Route path="pedagogical" element={<PedagogicalDashboard />} />
+                <Route path="safety-hub" element={<SafetyDashboard />} />
+                <Route path="scientific-hub" element={<ScientificDashboard />} />
+                <Route path="settings-hub" element={<ManagementDashboard />} />
+                <Route path="important-links" element={<ImportantLinks />} />
                 <Route path="maintenance" element={<Maintenance />} />
                 <Route path="chemicals" element={<Chemicals />} />
                 <Route path="equipment" element={<Equipment />} />
@@ -188,6 +197,7 @@ export default function App() {
                 <Route path="archive" element={<Archive />} />
                 <Route path="teachers" element={<Teachers />} />
                 <Route path="daily-report" element={<DailyReport />} />
+                <Route path="professional-exams" element={<ProfessionalExams />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="design-system" element={<DesignSystem />} />
                 <Route path="diagnostic" element={<Diagnostic />} />

@@ -39,6 +39,7 @@ import {
   Binary,
   MessageSquare,
   ExternalLink,
+  Award,
 } from 'lucide-react';
 import { useState, useRef, useEffect, Suspense } from 'react';
 import { cn } from '../lib/utils';
@@ -94,20 +95,22 @@ export default function Layout() {
       icon: LayoutDashboard,
       items: [
         { name: 'لوحة القيادة', path: '/', icon: LayoutDashboard },
+        { name: 'لوحة الجرد الشاملة', path: '/inventory', icon: Database },
+        { name: 'اللوحة البيداغوجية', path: '/pedagogical', icon: BookOpen },
         ...(isAdmin ? [{ name: 'لوحة الإدارة المركزية', path: '/admin', icon: ShieldCheck }] : []),
       ]
     },
     {
-      title: 'لوحة الجرد الشاملة',
-      icon: Database,
+      title: 'الجرد والمخزون',
+      icon: Package,
       items: [
-        { name: 'إدارة المخزون', path: '/inventory', icon: Database },
+        { name: 'الكواشف الكيميائية', path: '/chemicals', icon: FlaskConical },
+        { name: 'التجهيزات المخبرية', path: '/equipment', icon: Beaker },
         { name: 'سجل بطاقات الجرد', path: '/inventory-cards', icon: FileText },
         { name: 'مصفوفة التوافق', path: '/chemical-storage', icon: ShieldCheck },
         { name: 'مركز الطباعة (QR)', path: '/qr-print-center', icon: Printer },
         { name: 'الصيانة والمعايرة', path: '/maintenance', icon: Wrench },
         { name: 'الحاسبة المخبرية', path: '/calculators', icon: Calculator },
-        { name: 'دليل السلامة', path: '/safety-guide', icon: ShieldAlert },
       ]
     },
     {
@@ -115,7 +118,6 @@ export default function Layout() {
       icon: BookOpen,
       items: [
         { name: 'مساعد مخبري (AI)', path: '/lab-assistant', icon: Sparkles },
-        { name: 'لوحة التحكم البيداغوجية', path: '/pedagogical', icon: BookOpen },
         { name: 'المكتبة الرقمية', path: '/document-library', icon: Folder },
         { name: 'جدول استعمال المخابر', path: '/lab-schedule', icon: Clock },
         { name: 'سجل التجارب المخبرية', path: '/lab-experiments', icon: FlaskConical },
@@ -126,18 +128,21 @@ export default function Layout() {
       ]
     },
     {
+      title: 'الأمن والسلامة',
+      icon: ShieldAlert,
+      items: [
+        { name: 'الأمن والسلامة', path: '/safety', icon: ShieldAlert },
+        { name: 'إدارة النفايات الكيميائية', path: '/chemical-waste', icon: Trash2 },
+        { name: 'دليل السلامة', path: '/safety-guide', icon: ShieldAlert },
+      ]
+    },
+    {
       title: 'الموارد العلمية',
       icon: Atom,
       items: [
         { name: 'الجدول الدوري', path: '/periodic-table', icon: Atom },
         { name: 'أدوات الكيمياء', path: '/chemistry-tools', icon: Binary },
-      ]
-    },
-    {
-      title: 'المنصات الوزارية',
-      icon: ExternalLink,
-      items: [
-        { name: 'فضاء الموظف', path: 'https://mowadaf.education.dz/', icon: ExternalLink, external: true },
+        { name: 'الخريطة التربوية', path: '/educational-map', icon: Map },
       ]
     },
     {
@@ -147,11 +152,13 @@ export default function Layout() {
         { name: 'الإعدادات الشخصية', path: '/settings', icon: Settings },
         { name: 'مركز النسخ والبيانات', path: '/backup-center', icon: Database },
         { name: 'الميزانية والطلبيات', path: '/budget-purchases', icon: Wallet },
+        { name: 'الإمتحانات المهنية', path: '/professional-exams', icon: Award },
+        { name: 'فضاء الموظف', path: 'https://mowadaf.education.dz/', icon: ExternalLink, external: true },
         { name: 'الدعم والاقتراحات', path: '/support', icon: MessageSquare },
       ]
     },
   ];
-  const [expandedGroups, setExpandedGroups] = useState<string[]>(['لوحة التحكم الرئيسية', 'لوحة الجرد الشاملة']);
+  const [expandedGroups, setExpandedGroups] = useState<string[]>(['لوحة التحكم الرئيسية', 'الجرد والمخزون']);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isQRScannerOpen, setIsQRScannerOpen] = useState(false);

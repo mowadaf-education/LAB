@@ -454,18 +454,11 @@ export default function Dashboard() {
   };
 
   const modules = [
-    { title: 'لوحة الجرد الشاملة', desc: 'إدارة كافة ممتلكات المخبر من كواشف، أجهزة، زجاجيات ونفايات في مكان واحد.', count: (counts.chemicals + counts.equipment).toString(), icon: Database, color: 'bg-primary/10', path: '/inventory' },
-    { title: 'اللوحة البيداغوجية', desc: 'تسيير الجداول، الأساتذة، الأفواج، التقارير اليومية والنماذج.', count: 'شامل', icon: BookOpen, color: 'bg-primary-container/20 text-primary', path: '/pedagogical' },
-    { title: 'الميزانية والطلبيات', desc: 'تسيير الميزانية، وتخطيط طلبيات الشراء الخاصة بالمخبر.', count: 'مالي', icon: Wallet, color: 'bg-surface-container-high', path: '/budget-purchases' },
-    { title: 'التشريع المدرسي', desc: 'القوانين والمراسيم المنظمة لعمل المخبري وحوادث العمل.', count: 'قانوني', icon: Scale, color: 'bg-surface-container-high', path: '/school-legislation' },
-    { title: 'الأرشيف الرقمي', desc: 'أرشفة كافة الوثائق والمحاضر السابقة.', count: 'سجلات', icon: Archive, color: 'bg-surface-container-low', path: '/archive' },
-    { title: 'الأمن والسلامة', desc: 'بروتوكولات السلامة، طفايات الحريق، ومعدات الإسعاف.', count: counts.incidents.toString(), icon: ShieldAlert, color: 'bg-error/10', path: '/safety' },
-    { title: 'الجدول الدوري', desc: 'استكشاف تفاعلي ومفصل لكافة عناصر الجدول الدوري الـ 118 مع خصائصها.', count: '118 عنصر', icon: Atom, color: 'bg-indigo-100 text-indigo-700', path: '/periodic-table' },
-    { title: 'أدوات الكيمياء', desc: 'موازن المعادلات، حاسبة الكتلة المولية، وجداول الذوبانية المتطورة.', count: 'أدوات', icon: Binary, color: 'bg-emerald-100 text-emerald-700', path: '/chemistry-tools' },
-    { title: 'دليل السلامة', desc: 'دليل تفصيلي لإجراءات الأمن والمخاطر.', count: 'إرشادات', icon: ShieldCheck, color: 'bg-surface-container-low', path: '/safety-guide' },
-    { title: 'النسخ والبيانات', desc: 'إدارة النسخ الاحتياطي السحابي واستعادة السجلات.', count: 'تقنية', icon: Server, color: 'bg-surface-container-highest', path: '/database-management' },
-    { title: 'فضاء الموظف', desc: 'الوصول السريع إلى البوابة الرقمية لوزارة التربية الوطنية (الأرضية الرقمية).', count: 'خارجي', icon: ExternalLink, color: 'bg-blue-100 text-blue-700', path: 'https://mowadaf.education.dz/', external: true },
-    { title: 'إعدادات النظام', desc: 'تكوين إعدادات المخبر والحساب.', count: 'عام', icon: Settings, color: 'bg-surface-container-low', path: '/settings' },
+    { title: 'الجرد والمخزون', desc: 'إدارة كافة الممتلكات من كواشف وأجهزة ومراجعة مصفوفات التوافق.', count: (counts.chemicals + counts.equipment).toString(), icon: Database, color: 'bg-primary/10', path: '/inventory' },
+    { title: 'المتابعة البيداغوجية', desc: 'تسيير الجداول الزمنية، الأساتذة، الأفواج، والتجارب المخبرية.', count: 'شامل', icon: BookOpen, color: 'bg-primary-container/20 text-primary', path: '/pedagogical' },
+    { title: 'الأمن والسلامة', desc: 'إدارة بروتوكولات السلامة والنفايات الكيميائية والإسعافات.', count: counts.incidents.toString(), icon: ShieldAlert, color: 'bg-error/10 text-error', path: '/safety-hub' },
+    { title: 'الموارد العلمية', desc: 'استكشاف الجدول الدوري، الخريطة التربوية وأدوات الكيمياء المتقدمة.', count: 'دليل', icon: Atom, color: 'bg-indigo-100 text-indigo-700', path: '/scientific-hub' },
+    { title: 'الإدارة والإعدادات', desc: 'تكوين الحساب، الميزانية، ومركز البيانات والنسخ الاحتياطي.', count: 'إعدادات', icon: Settings, color: 'bg-surface-container-high', path: '/settings-hub' },
     ...(isAdmin ? [{ 
       title: 'لوحة الإدارة المركزية', 
       desc: 'إدارة المستخدمين، الصلاحيات، والتحكم الشامل في النظام.', 
@@ -742,11 +735,7 @@ export default function Dashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + i * 0.05, duration: 0.3, ease: 'easeOut' }}
                 onClick={() => {
-                  if (mod.external) {
-                    window.open(mod.path, '_blank', 'noopener,noreferrer');
-                  } else {
-                    navigate(mod.path);
-                  }
+                  navigate(mod.path);
                 }}
                 className="bg-surface-container-lowest p-8 rounded-md3-card hover:shadow-ambient-hover hover:-translate-y-[2px] transition-all duration-300 ease-out group cursor-pointer relative overflow-hidden shadow-ambient"
               >
