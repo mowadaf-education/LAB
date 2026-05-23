@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 import { 
   Calendar, 
   Clock, 
@@ -22,84 +23,84 @@ const pedagogicalModules = [
     desc: 'تسجيل ومتابعة النشاطات اليومية للمخبر والحصص التطبيقية.', 
     icon: FileText, 
     color: 'bg-primary/10', 
-    path: '/daily-report' 
+    path: ROUTES.DAILY_REPORT 
   },
   { 
     title: 'فريق الأساتذة', 
     desc: 'قائمة أساتذة العلوم والفيزياء والجداول الزمنية للفريق التربوي.', 
     icon: Users, 
     color: 'bg-secondary-container/50', 
-    path: '/teachers' 
+    path: ROUTES.TEACHERS 
   },
   { 
     title: 'جدولة الحصص', 
     desc: 'تسيير الجدول الزمني للمؤسسة وتوزيع الفترات الدراسية.', 
     icon: Calendar, 
     color: 'bg-primary/5', 
-    path: '/timetable' 
+    path: ROUTES.TIMETABLE 
   },
   { 
     title: 'حصص المخبر', 
     desc: 'جدولة استخدام المخابر وتفادي التضارب بين الأفواج التربوية.', 
     icon: Clock, 
     color: 'bg-tertiary-container/30', 
-    path: '/lab-schedule' 
+    path: ROUTES.LAB_SCHEDULE 
   },
   { 
     title: 'المتابعة البيداغوجية', 
     desc: 'متابعة تنفيذ البرامج الدراسية والدروس التطبيقية المنجزة.', 
     icon: GraduationCap, 
     color: 'bg-surface-container-high', 
-    path: '/pedagogical-tracking' 
+    path: ROUTES.PEDAGOGICAL_TRACKING 
   },
   { 
     title: 'سجل المتابعة', 
     desc: 'سجل رقمي متكامل يضم استعمال الوسائل، وحصيلة الأعمال.', 
     icon: BookOpen, 
     color: 'bg-secondary/10', 
-    path: '/follow-up-registry' 
+    path: ROUTES.FOLLOW_UP_REGISTRY 
   },
   { 
     title: 'تسيير الأفواج', 
     desc: 'إدارة وتنظيم أفواج التلاميذ ضمن الأقسام والمخابر.', 
     icon: Users, 
     color: 'bg-surface-container-low', 
-    path: '/student-groups' 
+    path: ROUTES.STUDENT_GROUPS 
   },
   { 
     title: 'إدارة الخريطة التربوية', 
     desc: 'توزيع التلاميذ والأقسام على القاعات والمخابر المتاحة.', 
     icon: Map, 
     color: 'bg-tertiary-container/20', 
-    path: '/educational-map' 
+    path: ROUTES.EDUCATIONAL_MAP 
   },
   { 
     title: 'التحضير الذكي للنماذج', 
     desc: 'توليد النماذج الرقمية باستخدام مساعد الذكاء الاصطناعي.', 
     icon: Sparkles, 
     color: 'bg-primary/10', 
-    path: '/smart-forms' 
+    path: ROUTES.SMART_FORMS 
   },
   { 
     title: 'طلب نشاط تطبيقي', 
     desc: 'تقديم ومتابعة طلبات التجارب والنشاطات العلمية.', 
     icon: PlusCircle, 
     color: 'bg-error-container text-on-error-container', 
-    path: '/activity-request' 
+    path: ROUTES.ACTIVITY_REQUEST 
   },
   { 
     title: 'مزامنة الحصص', 
     desc: 'ربط التحضير الذكي بجدول الحصص الفعلي لضمان الجاهزية.', 
     icon: RefreshCw, 
     color: 'bg-surface-container-high', 
-    path: '/sync' 
+    path: ROUTES.SYNC 
   },
   { 
     title: 'الحاسبة المخبرية', 
     desc: 'أدوات وحسابات سريعة لتحضير المحاليل وإدارة التراكيز.', 
     icon: Calculator, 
     color: 'bg-primary/5 text-primary', 
-    path: '/calculators' 
+    path: ROUTES.CALCULATORS 
   },
 ];
 
@@ -120,7 +121,7 @@ export default function PedagogicalDashboard() {
         </div>
         
         <button 
-          onClick={() => navigate('/')}
+          onClick={() => navigate(ROUTES.HOME)}
           className="bg-surface-container-lowest text-primary px-8 py-4 rounded-full text-[0.875rem] font-bold flex items-center gap-3 shadow-ambient hover:shadow-ambient-hover hover:-translate-y-[2px] transition-all duration-300 ease-out active:scale-95"
         >
           <ArrowLeft size={20} />

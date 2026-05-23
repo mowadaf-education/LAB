@@ -9,6 +9,7 @@ import { onAuthStateChanged, User } from 'firebase/auth';
 import { HelmetProvider } from 'react-helmet-async';
 import { auth, testFirestoreConnection } from './firebase';
 
+import { ROUTES } from './config/routes';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Layout from './components/Layout';
@@ -125,7 +126,7 @@ export default function App() {
                   <button onClick={() => setConnectionError(null)} className="opacity-50 hover:opacity-100">✕</button>
                 </div>
                 <a 
-                  href="/diagnostic" 
+                  href={ROUTES.DIAGNOSTIC} 
                   className="bg-white/20 hover:bg-white/30 transition-colors py-2 px-4 rounded-xl text-[10px] font-bold text-center flex items-center justify-center gap-2"
                 >
                   تشغيل أداة التشخيص
@@ -143,66 +144,66 @@ export default function App() {
             }>
               {(!user || setupComplete) ? (
                 <Routes>
-                <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
-                <Route path="/admin-setup" element={<Navigate to="/admin" replace />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/data-deletion" element={<DataDeletion />} />
-                <Route path="/terms-of-service" element={<TermsOfService />} />
+                <Route path={ROUTES.LOGIN} element={user ? <Navigate to={ROUTES.HOME} /> : <Login />} />
+                <Route path="/admin-setup" element={<Navigate to={ROUTES.ADMIN} replace />} />
+                <Route path={ROUTES.PRIVACY_POLICY} element={<PrivacyPolicy />} />
+                <Route path={ROUTES.DATA_DELETION} element={<DataDeletion />} />
+                <Route path={ROUTES.TERMS_OF_SERVICE} element={<TermsOfService />} />
                 <Route
-                  path="/"
-                  element={user ? <Layout /> : <Navigate to="/login" />}
+                  path={ROUTES.HOME}
+                  element={user ? <Layout /> : <Navigate to={ROUTES.LOGIN} />}
                 >
                   <Route index element={<Dashboard />} />
-                  <Route path="admin" element={<AdminDashboard />} />
-                  <Route path="support" element={<Support />} />
-                  <Route path="document-library" element={<DocumentLibrary />} />
-                <Route path="inventory" element={<InventoryDashboard />} />
-                <Route path="pedagogical" element={<PedagogicalDashboard />} />
-                <Route path="safety-hub" element={<SafetyDashboard />} />
-                <Route path="scientific-hub" element={<ScientificDashboard />} />
-                <Route path="settings-hub" element={<ManagementDashboard />} />
-                <Route path="important-links" element={<ImportantLinks />} />
-                <Route path="maintenance" element={<Maintenance />} />
-                <Route path="chemicals" element={<Chemicals />} />
-                <Route path="equipment" element={<Equipment />} />
-                <Route path="inventory-cards" element={<InventoryCardsRegistry />} />
-                <Route path="tech-inventory" element={<TechInventory />} />
-                <Route path="glassware-breakage" element={<GlasswareBreakage />} />
-                <Route path="smart-forms" element={<SmartForms />} />
-                <Route path="chemical-waste" element={<ChemicalWaste />} />
-                <Route path="chemical-storage" element={<ChemicalStorage />} />
-                <Route path="school-legislation" element={<SchoolLegislation />} />
-                <Route path="safety-guide" element={<SafetyGuide />} />
-                <Route path="calculators" element={<LabCalculators />} />
-                <Route path="educational-map" element={<EducationalMap />} />
-                <Route path="consumables-sds" element={<ConsumablesSDS />} />
-                <Route path="backup" element={<BackupCenter />} />
-                <Route path="budget-purchases" element={<BudgetPurchases />} />
-                <Route path="database-management" element={<DatabaseManagement />} />
-                <Route path="qr-print-center" element={<QRPrintCenter />} />
-                <Route path="student-groups" element={<StudentGroups />} />
-                <Route path="timetable" element={<Timetable />} />
-                <Route path="lab-schedule" element={<LabSchedule />} />
-                <Route path="lab-experiments" element={<LabExperiments />} />
-                <Route path="lab-assistant" element={<LabAssistant />} />
-                <Route path="pedagogical-tracking" element={<PedagogicalTracking />} />
-                <Route path="follow-up-registry" element={<FollowUpRegistry />} />
-                <Route path="sync" element={<Sync />} />
-                <Route path="activity-request" element={<ActivityRequest />} />
-                <Route path="loan-request" element={<LoanRequest />} />
-                <Route path="scrapping" element={<EquipmentScrapping />} />
-                <Route path="safety" element={<Safety />} />
-                <Route path="reports" element={<Reports />} />
-                <Route path="archive" element={<Archive />} />
-                <Route path="teachers" element={<Teachers />} />
-                <Route path="daily-report" element={<DailyReport />} />
-                <Route path="professional-exams" element={<ProfessionalExams />} />
-                <Route path="settings" element={<Settings />} />
-                <Route path="design-system" element={<DesignSystem />} />
-                <Route path="diagnostic" element={<Diagnostic />} />
+                  <Route path={ROUTES.ADMIN.substring(1)} element={<AdminDashboard />} />
+                  <Route path={ROUTES.SUPPORT.substring(1)} element={<Support />} />
+                  <Route path={ROUTES.DOCUMENT_LIBRARY.substring(1)} element={<DocumentLibrary />} />
+                <Route path={ROUTES.INVENTORY_DASHBOARD.substring(1)} element={<InventoryDashboard />} />
+                <Route path={ROUTES.PEDAGOGICAL_DASHBOARD.substring(1)} element={<PedagogicalDashboard />} />
+                <Route path={ROUTES.SAFETY_HUB.substring(1)} element={<SafetyDashboard />} />
+                <Route path={ROUTES.SCIENTIFIC_HUB.substring(1)} element={<ScientificDashboard />} />
+                <Route path={ROUTES.SETTINGS_HUB.substring(1)} element={<ManagementDashboard />} />
+                <Route path={ROUTES.IMPORTANT_LINKS.substring(1)} element={<ImportantLinks />} />
+                <Route path={ROUTES.MAINTENANCE.substring(1)} element={<Maintenance />} />
+                <Route path={ROUTES.CHEMICALS.substring(1)} element={<Chemicals />} />
+                <Route path={ROUTES.EQUIPMENT.substring(1)} element={<Equipment />} />
+                <Route path={ROUTES.INVENTORY_CARDS.substring(1)} element={<InventoryCardsRegistry />} />
+                <Route path={ROUTES.TECH_INVENTORY.substring(1)} element={<TechInventory />} />
+                <Route path={ROUTES.GLASSWARE_BREAKAGE.substring(1)} element={<GlasswareBreakage />} />
+                <Route path={ROUTES.SMART_FORMS.substring(1)} element={<SmartForms />} />
+                <Route path={ROUTES.CHEMICAL_WASTE.substring(1)} element={<ChemicalWaste />} />
+                <Route path={ROUTES.CHEMICAL_STORAGE.substring(1)} element={<ChemicalStorage />} />
+                <Route path={ROUTES.SCHOOL_LEGISLATION.substring(1)} element={<SchoolLegislation />} />
+                <Route path={ROUTES.SAFETY_GUIDE.substring(1)} element={<SafetyGuide />} />
+                <Route path={ROUTES.CALCULATORS.substring(1)} element={<LabCalculators />} />
+                <Route path={ROUTES.EDUCATIONAL_MAP.substring(1)} element={<EducationalMap />} />
+                <Route path={ROUTES.CONSUMABLES_SDS.substring(1)} element={<ConsumablesSDS />} />
+                <Route path={ROUTES.BACKUP_CENTER.substring(1)} element={<BackupCenter />} />
+                <Route path={ROUTES.BUDGET_PURCHASES.substring(1)} element={<BudgetPurchases />} />
+                <Route path={ROUTES.DATABASE_MANAGEMENT.substring(1)} element={<DatabaseManagement />} />
+                <Route path={ROUTES.QR_PRINT_CENTER.substring(1)} element={<QRPrintCenter />} />
+                <Route path={ROUTES.STUDENT_GROUPS.substring(1)} element={<StudentGroups />} />
+                <Route path={ROUTES.TIMETABLE.substring(1)} element={<Timetable />} />
+                <Route path={ROUTES.LAB_SCHEDULE.substring(1)} element={<LabSchedule />} />
+                <Route path={ROUTES.LAB_EXPERIMENTS.substring(1)} element={<LabExperiments />} />
+                <Route path={ROUTES.LAB_ASSISTANT.substring(1)} element={<LabAssistant />} />
+                <Route path={ROUTES.PEDAGOGICAL_TRACKING.substring(1)} element={<PedagogicalTracking />} />
+                <Route path={ROUTES.FOLLOW_UP_REGISTRY.substring(1)} element={<FollowUpRegistry />} />
+                <Route path={ROUTES.SYNC.substring(1)} element={<Sync />} />
+                <Route path={ROUTES.ACTIVITY_REQUEST.substring(1)} element={<ActivityRequest />} />
+                <Route path={ROUTES.LOAN_REQUEST.substring(1)} element={<LoanRequest />} />
+                <Route path={ROUTES.SCRAPPING.substring(1)} element={<EquipmentScrapping />} />
+                <Route path={ROUTES.SAFETY.substring(1)} element={<Safety />} />
+                <Route path={ROUTES.REPORTS.substring(1)} element={<Reports />} />
+                <Route path={ROUTES.ARCHIVE.substring(1)} element={<Archive />} />
+                <Route path={ROUTES.TEACHERS.substring(1)} element={<Teachers />} />
+                <Route path={ROUTES.DAILY_REPORT.substring(1)} element={<DailyReport />} />
+                <Route path={ROUTES.PROFESSIONAL_EXAMS.substring(1)} element={<ProfessionalExams />} />
+                <Route path={ROUTES.SETTINGS.substring(1)} element={<Settings />} />
+                <Route path={ROUTES.DESIGN_SYSTEM.substring(1)} element={<DesignSystem />} />
+                <Route path={ROUTES.DIAGNOSTIC.substring(1)} element={<Diagnostic />} />
                 {/* Catch-all 404 route for authenticated users */}
-                <Route path="periodic-table" element={<PeriodicTable />} />
-                <Route path="chemistry-tools" element={<ChemistryTools />} />
+                <Route path={ROUTES.PERIODIC_TABLE.substring(1)} element={<PeriodicTable />} />
+                <Route path={ROUTES.CHEMISTRY_TOOLS.substring(1)} element={<ChemistryTools />} />
                 <Route path="*" element={<Navigate to="/not-found" replace />} />
               </Route>
               {/* Catch-all 404 route matching the base path */}

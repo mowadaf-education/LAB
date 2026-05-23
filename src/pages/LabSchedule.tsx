@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 import { cn } from '../lib/utils';
 import { db, getUserCollection, handleFirestoreError, OperationType } from '../firebase';
 import { onSnapshot, query, addDoc, serverTimestamp, deleteDoc, doc, orderBy } from 'firebase/firestore';
@@ -127,7 +128,7 @@ export default function LabSchedule() {
         
         <div className="flex items-center gap-4 relative z-10">
           <button 
-            onClick={() => navigate('/pedagogical')}
+            onClick={() => navigate(ROUTES.PEDAGOGICAL_DASHBOARD)}
             className="bg-surface text-primary border border-outline/10 px-8 py-4 rounded-[32px] font-black flex items-center gap-3 shadow-xl hover:bg-primary/5 transition-all active:scale-95"
           >
             <ArrowLeft size={24} />

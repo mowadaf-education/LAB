@@ -26,34 +26,7 @@ import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { FileText, Sparkles, Download, ShieldCheck as ShieldCheckIcon } from 'lucide-react';
 
-interface SafetyItem {
-  id: string;
-  name: string;
-  status: 'صالح' | 'تحتاج تحديث' | 'منتهي';
-  lastCheck: string;
-  serialNumber: string;
-  type: 'fire' | 'eye' | 'firstaid' | 'gas';
-}
-
-interface Incident {
-  id: string;
-  date: any;
-  type: string;
-  status: 'تم التعامل' | 'قيد المتابعة' | 'جديد' | 'تحت التحقيق';
-  reporter: string;
-  severity: 'low' | 'medium' | 'high';
-  description?: string;
-  location?: string;
-  injured?: string;
-  witnesses?: string;
-  firstAid?: string;
-  analysis?: {
-    rootCause: string;
-    suggestedActions: string[];
-    safetyTipsAr: string;
-    longTermMitigation: string;
-  };
-}
+import { SafetyItem, Incident } from '../types/safety';
 
 const iconMap = {
   fire: Flame,

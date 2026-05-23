@@ -48,6 +48,7 @@ import {
 import { motion } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
 import { cn } from '../lib/utils';
+import { ROUTES } from '../config/routes';
 
 import { 
   BarChart, 
@@ -356,9 +357,9 @@ export default function Dashboard() {
   };
 
   const stats = [
-    { label: 'إجمالي السجلات التقنية', value: (counts.equipment + counts.chemicals).toString(), trend: '+12%', icon: Database, color: 'bg-primary/10', path: '/inventory' },
-    { label: 'جلسات العمل والمطالبات', value: counts.reports.toString(), trend: 'نشط', icon: FileText, color: 'bg-secondary-container', path: '/reports' },
-    { label: 'تنبيهات النظام الحرجة', value: (counts.lowStock + counts.brokenEquip).toString(), trend: 'تتطلب تدخل', icon: AlertTriangle, color: 'bg-tertiary-container/20 text-tertiary', path: '/safety' },
+    { label: 'إجمالي السجلات التقنية', value: (counts.equipment + counts.chemicals).toString(), trend: '+12%', icon: Database, color: 'bg-primary/10', path: ROUTES.INVENTORY_DASHBOARD },
+    { label: 'جلسات العمل والمطالبات', value: counts.reports.toString(), trend: 'نشط', icon: FileText, color: 'bg-secondary-container', path: ROUTES.REPORTS },
+    { label: 'تنبيهات النظام الحرجة', value: (counts.lowStock + counts.brokenEquip).toString(), trend: 'تتطلب تدخل', icon: AlertTriangle, color: 'bg-tertiary-container/20 text-tertiary', path: ROUTES.SAFETY },
   ];
 
   const [isSmartUpdating, setIsSmartUpdating] = useState(false);
@@ -521,18 +522,18 @@ export default function Dashboard() {
   };
 
   const modules = [
-    { title: 'الجرد والمخزون', desc: 'إدارة كافة الممتلكات من كواشف وأجهزة ومراجعة مصفوفات التوافق.', count: (counts.chemicals + counts.equipment).toString(), icon: Database, color: 'bg-primary/10', path: '/inventory' },
-    { title: 'المتابعة البيداغوجية', desc: 'تسيير الجداول الزمنية، الأساتذة، الأفواج، والتجارب المخبرية.', count: 'شامل', icon: BookOpen, color: 'bg-primary-container/20 text-primary', path: '/pedagogical' },
-    { title: 'الأمن والسلامة', desc: 'إدارة بروتوكولات السلامة والنفايات الكيميائية والإسعافات.', count: counts.incidents.toString(), icon: ShieldAlert, color: 'bg-error/10 text-error', path: '/safety-hub' },
-    { title: 'الموارد العلمية', desc: 'استكشاف الجدول الدوري، الخريطة التربوية وأدوات الكيمياء المتقدمة.', count: 'دليل', icon: Atom, color: 'bg-indigo-100 text-indigo-700', path: '/scientific-hub' },
-    { title: 'الإدارة والإعدادات', desc: 'تكوين الحساب، الميزانية، ومركز البيانات والنسخ الاحتياطي.', count: 'إعدادات', icon: Settings, color: 'bg-surface-container-high', path: '/settings-hub' },
+    { title: 'الجرد والمخزون', desc: 'إدارة كافة الممتلكات من كواشف وأجهزة ومراجعة مصفوفات التوافق.', count: (counts.chemicals + counts.equipment).toString(), icon: Database, color: 'bg-primary/10', path: ROUTES.INVENTORY_DASHBOARD },
+    { title: 'المتابعة البيداغوجية', desc: 'تسيير الجداول الزمنية، الأساتذة، الأفواج، والتجارب المخبرية.', count: 'شامل', icon: BookOpen, color: 'bg-primary-container/20 text-primary', path: ROUTES.PEDAGOGICAL_DASHBOARD },
+    { title: 'الأمن والسلامة', desc: 'إدارة بروتوكولات السلامة والنفايات الكيميائية والإسعافات.', count: counts.incidents.toString(), icon: ShieldAlert, color: 'bg-error/10 text-error', path: ROUTES.SAFETY_HUB },
+    { title: 'الموارد العلمية', desc: 'استكشاف الجدول الدوري، الخريطة التربوية وأدوات الكيمياء المتقدمة.', count: 'دليل', icon: Atom, color: 'bg-indigo-100 text-indigo-700', path: ROUTES.SCIENTIFIC_HUB },
+    { title: 'الإدارة والإعدادات', desc: 'تكوين الحساب، الميزانية، ومركز البيانات والنسخ الاحتياطي.', count: 'إعدادات', icon: Settings, color: 'bg-surface-container-high', path: ROUTES.SETTINGS_HUB },
     ...(isAdmin ? [{ 
       title: 'لوحة الإدارة المركزية', 
       desc: 'إدارة المستخدمين، الصلاحيات، والتحكم الشامل في النظام.', 
       count: 'أدمن', 
       icon: ShieldCheck, 
       color: 'bg-primary text-on-primary', 
-      path: '/admin' 
+      path: ROUTES.ADMIN 
     }] : []),
   ];
 
@@ -630,7 +631,7 @@ export default function Dashboard() {
                   <p className="text-[0.875rem] text-error/80 font-bold">هناك {counts.lowStock} مواد كيميائية وصلت إلى الحد الأدنى.</p>
                 </div>
                 <button 
-                  onClick={() => navigate('/chemicals')}
+                  onClick={() => navigate(ROUTES.CHEMICALS)}
                   className="relative z-10 bg-error text-white text-[0.875rem] font-bold px-8 py-3 rounded-full shadow-ambient hover:shadow-ambient-hover hover:bg-error/90 transition-all duration-300 ease-out active:scale-95"
                 >
                   معالجة المخزون
@@ -654,7 +655,7 @@ export default function Dashboard() {
                   <p className="text-[0.875rem] text-primary/80 font-bold">هناك {counts.brokenEquip} أجهزة تحتاج إلى صيانة فورية.</p>
                 </div>
                 <button 
-                  onClick={() => navigate('/equipment')}
+                  onClick={() => navigate(ROUTES.EQUIPMENT)}
                   className="relative z-10 bg-gradient-to-r from-primary to-primary-container text-on-primary text-[0.875rem] font-bold px-8 py-3 rounded-full shadow-ambient hover:shadow-ambient-hover transition-all duration-300 ease-out active:scale-95"
                 >
                   سجل الصيانة
@@ -692,7 +693,7 @@ export default function Dashboard() {
                   ))}
                 </div>
                 <button 
-                  onClick={() => navigate('/chemicals')}
+                  onClick={() => navigate(ROUTES.CHEMICALS)}
                   className="bg-orange-600 text-white px-8 py-3 rounded-full font-black text-sm shadow-ambient hover:bg-orange-700 transition-all active:scale-95"
                 >
                   إدارة المواد
@@ -755,7 +756,7 @@ export default function Dashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                onClick={() => navigate('/daily-report')}
+                onClick={() => navigate(ROUTES.DAILY_REPORT)}
                 className="bg-surface p-6 rounded-[32px] border border-outline/5 shadow-xl hover:shadow-2xl transition-all cursor-pointer group"
               >
                 <div className="flex items-center gap-4 mb-4">
@@ -868,7 +869,7 @@ export default function Dashboard() {
 
           <div className="flex flex-wrap gap-4 pt-4">
             <button 
-              onClick={() => navigate('/lab-experiments')}
+              onClick={() => navigate(ROUTES.LAB_EXPERIMENTS)}
               className="bg-primary text-on-primary px-8 py-4 rounded-full font-black shadow-xl shadow-primary/20 hover:scale-105 transition-all text-sm flex items-center gap-2"
             >
               استعراض سجل التجارب

@@ -10,22 +10,58 @@ import { GoogleGenAI } from '@google/genai';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ─── Rate Limiter بسيط في الذاكرة ─────────────────────────────────────────
-function createRateLimiter(windowMs: number, maxRequests: number) {
-  const hits = new Map<string, { count: number; resetAt: number }>();
-  return (req: Request, res: Response, next: NextFunction) => {
-    const key = req.ip ?? 'unknown';
+// ─── Rate Limiter الأمني ──────────────────────────────────────────────────
+// تم تصميم هذا النظام ليكون "جاهزاً للسحاب". حالياً يعمل في الذاكرة (MemoryStore)،
+// وإذا نُشر التطبيق على عدة خوادم (Horizontal Scaling)، يمكن تبديل المخزن بـ RedisStore.
+
+interface RateLimitStore {
+  increment: (key: string, windowMs: number) => Promise<{ count: number; resetAt: number }>;
+}
+
+/**
+ * مخزن بسيط في الذاكرة للتحكم في عدد الطلبات.
+ * ملاحظة: هذا المخزن يُفقد عند إعادة تشغيل الخادم ولا يُشارك بين المثيلات المختلفة.
+ */
+class MemoryStore implements RateLimitStore {
+  private hits = new Map<string, { count: number; resetAt: number }>();
+
+  async increment(key: string, windowMs: number) {
     const now = Date.now();
-    const entry = hits.get(key);
+    const entry = this.hits.get(key);
+
     if (!entry || now > entry.resetAt) {
-      hits.set(key, { count: 1, resetAt: now + windowMs });
-      return next();
+      const newEntry = { count: 1, resetAt: now + windowMs };
+      this.hits.set(key, newEntry);
+      return newEntry;
     }
+
     entry.count++;
-    if (entry.count > maxRequests) {
-      return res.status(429).json({ error: 'طلبات كثيرة جداً. يرجى الانتظار قليلاً.' });
+    return entry;
+  }
+}
+
+/**
+ * TODO (للمستقبل): إذا انتقلت للسحاب واستخدمت Redis، قم بتنفيذ هذا الكائن:
+ * class RedisStore implements RateLimitStore { ... }
+ */
+
+function createRateLimiter(windowMs: number, maxRequests: number, store: RateLimitStore = new MemoryStore()) {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const key = req.ip ?? 'unknown';
+      const result = await store.increment(key, windowMs);
+
+      if (result.count > maxRequests) {
+        return res.status(429).json({ 
+          error: 'طلبات كثيرة جداً. يرجى الانتظار قليلاً.',
+          retryAfter: Math.ceil((result.resetAt - Date.now()) / 1000)
+        });
+      }
+      next();
+    } catch (error) {
+      // في حال فشل Rate Limiter، نمرر الطلب لضمان استمرارية الخدمة
+      next();
     }
-    next();
   };
 }
 

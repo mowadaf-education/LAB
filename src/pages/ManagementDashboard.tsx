@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 import { 
   Settings, 
   Database, 
@@ -17,42 +18,42 @@ const managementModules = [
     desc: 'تعديل بيانات الحساب، كلمات المرور، والمعلومات الشخصية للمستخدم.', 
     icon: Settings, 
     color: 'bg-primary/10', 
-    path: '/settings' 
+    path: ROUTES.SETTINGS 
   },
   { 
     title: 'مركز النسخ والبيانات', 
     desc: 'إدارة النسخ الاحتياطية واستعادة البيانات وقواعد البيانات الخاصة بك.', 
     icon: Database, 
     color: 'bg-surface-container-high', 
-    path: '/backup-center' 
+    path: ROUTES.BACKUP_CENTER 
   },
   { 
     title: 'الميزانية والطلبيات', 
     desc: 'تسيير وتخطيط الجانب المالي وطلبيات الشراء الخاصة بالمخبر.', 
     icon: Wallet, 
     color: 'bg-emerald-100 text-emerald-700', 
-    path: '/budget-purchases' 
+    path: ROUTES.BUDGET_PURCHASES 
   },
   { 
     title: 'الإمتحانات المهنية', 
     desc: 'متابعة الامتحانات والإختبارات المهنية للترقية، ومستجدات المسابقات الداخلية.', 
     icon: Award, 
     color: 'bg-indigo-100 text-indigo-700', 
-    path: '/professional-exams' 
+    path: ROUTES.PROFESSIONAL_EXAMS 
   },
   { 
     title: 'موارد وروابط هامة', 
     desc: 'مجموعة من المنصات والمواقع الرسمية التابعة لوزارة التربية الوطنية.', 
     icon: ExternalLink, 
     color: 'bg-orange-100 text-orange-700', 
-    path: '/important-links' 
+    path: ROUTES.IMPORTANT_LINKS 
   },
   { 
     title: 'الدعم والاقتراحات', 
     desc: 'التواصل لتقديم اقتراح أو الإبلاغ عن مشكلة فنية.', 
     icon: MessageSquare, 
     color: 'bg-blue-100 text-blue-700', 
-    path: '/support' 
+    path: ROUTES.SUPPORT 
   }
 ];
 

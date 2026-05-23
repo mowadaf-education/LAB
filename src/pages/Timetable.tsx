@@ -3,6 +3,7 @@ import { Calendar, Clock, Users, MapPin, Plus, ArrowLeft, Download, Filter, Sear
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '../lib/utils';
+import { ROUTES } from '../config/routes';
 
 interface TimetableEntry {
   id: string;
@@ -51,7 +52,7 @@ export default function Timetable() {
         
         <div className="flex items-center gap-4 relative z-10">
           <button 
-            onClick={() => navigate('/pedagogical')}
+            onClick={() => navigate(ROUTES.PEDAGOGICAL_DASHBOARD)}
             className="bg-surface text-primary border border-outline/10 px-8 py-4 rounded-[32px] font-black flex items-center gap-3 shadow-xl hover:bg-primary/5 transition-all active:scale-95"
           >
             <ArrowLeft size={24} />

@@ -51,6 +51,7 @@ import GlobalSearch from './GlobalSearch';
 import Breadcrumbs from './Breadcrumbs';
 import NotificationCenter from './NotificationCenter';
 import logo from '/ministry-logo.png';
+import { ROUTES } from '../config/routes';
 
 export default function Layout() {
   const location = useLocation();
@@ -99,67 +100,67 @@ export default function Layout() {
       title: 'لوحة التحكم الرئيسية',
       icon: LayoutDashboard,
       items: [
-        { name: 'لوحة القيادة', path: '/', icon: LayoutDashboard },
-        { name: 'لوحة الجرد الشاملة', path: '/inventory', icon: Database },
-        { name: 'اللوحة البيداغوجية', path: '/pedagogical', icon: BookOpen },
-        ...(isAdmin ? [{ name: 'لوحة الإدارة المركزية', path: '/admin', icon: ShieldCheck }] : []),
+        { name: 'لوحة القيادة', path: ROUTES.HOME, icon: LayoutDashboard },
+        { name: 'لوحة الجرد الشاملة', path: ROUTES.INVENTORY_DASHBOARD, icon: Database },
+        { name: 'اللوحة البيداغوجية', path: ROUTES.PEDAGOGICAL_DASHBOARD, icon: BookOpen },
+        ...(isAdmin ? [{ name: 'لوحة الإدارة المركزية', path: ROUTES.ADMIN, icon: ShieldCheck }] : []),
       ]
     },
     {
       title: 'الجرد والمخزون',
       icon: Package,
       items: [
-        { name: 'الكواشف الكيميائية', path: '/chemicals', icon: FlaskConical },
-        { name: 'التجهيزات المخبرية', path: '/equipment', icon: Beaker },
-        { name: 'سجل بطاقات الجرد', path: '/inventory-cards', icon: FileText },
-        { name: 'مصفوفة التوافق', path: '/chemical-storage', icon: ShieldCheck },
-        { name: 'مركز الطباعة (QR)', path: '/qr-print-center', icon: Printer },
-        { name: 'الصيانة والمعايرة', path: '/maintenance', icon: Wrench },
-        { name: 'الحاسبة المخبرية', path: '/calculators', icon: Calculator },
+        { name: 'الكواشف الكيميائية', path: ROUTES.CHEMICALS, icon: FlaskConical },
+        { name: 'التجهيزات المخبرية', path: ROUTES.EQUIPMENT, icon: Beaker },
+        { name: 'سجل بطاقات الجرد', path: ROUTES.INVENTORY_CARDS, icon: FileText },
+        { name: 'مصفوفة التوافق', path: ROUTES.CHEMICAL_STORAGE, icon: ShieldCheck },
+        { name: 'مركز الطباعة (QR)', path: ROUTES.QR_PRINT_CENTER, icon: Printer },
+        { name: 'الصيانة والمعايرة', path: ROUTES.MAINTENANCE, icon: Wrench },
+        { name: 'الحاسبة المخبرية', path: ROUTES.CALCULATORS, icon: Calculator },
       ]
     },
     {
       title: 'المتابعة البيداغوجية',
       icon: BookOpen,
       items: [
-        { name: 'مساعد مخبري (AI)', path: '/lab-assistant', icon: Sparkles },
-        { name: 'المكتبة الرقمية', path: '/document-library', icon: Folder },
-        { name: 'جدول استعمال المخابر', path: '/lab-schedule', icon: Clock },
-        { name: 'سجل التجارب المخبرية', path: '/lab-experiments', icon: FlaskConical },
-        { name: 'المولد الذكي للنماذج', path: '/smart-forms', icon: FileText },
-        { name: 'تسيير الأفواج', path: '/student-groups', icon: Users },
-        { name: 'الأرشيف الرقمي', path: '/archive', icon: Archive },
-        { name: 'التشريع المدرسي', path: '/school-legislation', icon: Scale },
+        { name: 'مساعد مخبري (AI)', path: ROUTES.LAB_ASSISTANT, icon: Sparkles },
+        { name: 'المكتبة الرقمية', path: ROUTES.DOCUMENT_LIBRARY, icon: Folder },
+        { name: 'جدول استعمال المخابر', path: ROUTES.LAB_SCHEDULE, icon: Clock },
+        { name: 'سجل التجارب المخبرية', path: ROUTES.LAB_EXPERIMENTS, icon: FlaskConical },
+        { name: 'المولد الذكي للنماذج', path: ROUTES.SMART_FORMS, icon: FileText },
+        { name: 'تسيير الأفواج', path: ROUTES.STUDENT_GROUPS, icon: Users },
+        { name: 'الأرشيف الرقمي', path: ROUTES.ARCHIVE, icon: Archive },
+        { name: 'التشريع المدرسي', path: ROUTES.SCHOOL_LEGISLATION, icon: Scale },
       ]
     },
     {
       title: 'الأمن والسلامة',
       icon: ShieldAlert,
       items: [
-        { name: 'الأمن والسلامة', path: '/safety', icon: ShieldAlert },
-        { name: 'إدارة النفايات الكيميائية', path: '/chemical-waste', icon: Trash2 },
-        { name: 'دليل السلامة', path: '/safety-guide', icon: ShieldAlert },
+        { name: 'الأمن والسلامة', path: ROUTES.SAFETY, icon: ShieldAlert },
+        { name: 'إدارة النفايات الكيميائية', path: ROUTES.CHEMICAL_WASTE, icon: Trash2 },
+        { name: 'دليل السلامة', path: ROUTES.SAFETY_GUIDE, icon: ShieldAlert },
       ]
     },
     {
       title: 'الموارد العلمية',
       icon: Atom,
       items: [
-        { name: 'الجدول الدوري', path: '/periodic-table', icon: Atom },
-        { name: 'أدوات الكيمياء', path: '/chemistry-tools', icon: Binary },
-        { name: 'الخريطة التربوية', path: '/educational-map', icon: Map },
+        { name: 'الجدول الدوري', path: ROUTES.PERIODIC_TABLE, icon: Atom },
+        { name: 'أدوات الكيمياء', path: ROUTES.CHEMISTRY_TOOLS, icon: Binary },
+        { name: 'الخريطة التربوية', path: ROUTES.EDUCATIONAL_MAP, icon: Map },
       ]
     },
     {
       title: 'الإدارة والإعدادات',
       icon: Settings,
       items: [
-        { name: 'الإعدادات الشخصية', path: '/settings', icon: Settings },
-        { name: 'مركز النسخ والبيانات', path: '/backup-center', icon: Database },
-        { name: 'الميزانية والطلبيات', path: '/budget-purchases', icon: Wallet },
-        { name: 'الإمتحانات المهنية', path: '/professional-exams', icon: Award },
+        { name: 'الإعدادات الشخصية', path: ROUTES.SETTINGS, icon: Settings },
+        { name: 'مركز النسخ والبيانات', path: ROUTES.BACKUP_CENTER, icon: Database },
+        { name: 'الميزانية والطلبيات', path: ROUTES.BUDGET_PURCHASES, icon: Wallet },
+        { name: 'الإمتحانات المهنية', path: ROUTES.PROFESSIONAL_EXAMS, icon: Award },
         { name: 'فضاء الموظف', path: 'https://mowadaf.education.dz/', icon: ExternalLink, external: true },
-        { name: 'الدعم والاقتراحات', path: '/support', icon: MessageSquare },
+        { name: 'الدعم والاقتراحات', path: ROUTES.SUPPORT, icon: MessageSquare },
       ]
     },
   ];
@@ -480,7 +481,7 @@ export default function Layout() {
                     </div>
                     
                     <Link 
-                      to="/settings" 
+                      to={ROUTES.SETTINGS} 
                       onClick={() => setIsProfileMenuOpen(false)}
                       className="flex items-center gap-3 px-4 py-2 text-sm text-secondary hover:bg-primary/5 rounded-xl transition-colors"
                     >

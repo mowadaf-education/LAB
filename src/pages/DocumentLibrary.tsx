@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 import { db, getUserCollection, handleFirestoreError, OperationType } from '../firebase';
 import { onSnapshot, query, addDoc, serverTimestamp, orderBy, deleteDoc, doc } from 'firebase/firestore';
 import { cn } from '../lib/utils';
@@ -40,7 +41,7 @@ const QUICK_LINKS = [
   { 
     title: 'التشريع المدرسي', 
     desc: 'القوانين، المراسيم، والمناشير الرسمية المنظمة للمخابر والتربية.', 
-    path: '/school-legislation', 
+    path: ROUTES.SCHOOL_LEGISLATION, 
     icon: Scale, 
     color: 'bg-primary/10 text-primary',
     accent: 'border-primary/20'
@@ -48,7 +49,7 @@ const QUICK_LINKS = [
   { 
     title: 'دليل السلامة', 
     desc: 'بروتوكولات الطوارئ، الإسعافات الأولية، وقواعد الأمن المخبري.', 
-    path: '/safety-guide', 
+    path: ROUTES.SAFETY_GUIDE, 
     icon: ShieldAlert, 
     color: 'bg-error/10 text-error',
     accent: 'border-error/20'
@@ -56,7 +57,7 @@ const QUICK_LINKS = [
   { 
     title: 'المولد الذكي', 
     desc: 'إنشاء نماذج وتقارير رسمية (محاضر جرد، طلبات مواد) بضغطة زر.', 
-    path: '/smart-forms', 
+    path: ROUTES.SMART_FORMS, 
     icon: FileText, 
     color: 'bg-tertiary/10 text-tertiary',
     accent: 'border-tertiary/20'

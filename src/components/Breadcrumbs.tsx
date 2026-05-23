@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronLeft, Home } from 'lucide-react';
+import { ROUTES } from '../config/routes';
 
 const routeMap: Record<string, string> = {
   'admin': 'إدارة النظام',
@@ -132,7 +133,7 @@ export default function Breadcrumbs() {
       <ol className="flex items-center flex-wrap gap-2">
         <li className="flex items-center">
           <Link 
-            to="/" 
+            to={ROUTES.HOME} 
             className="text-secondary hover:text-primary transition-colors flex items-center gap-1.5 text-xs font-bold"
           >
             <Home size={14} />

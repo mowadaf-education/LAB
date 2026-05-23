@@ -19,6 +19,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 import logo from '/ministry-logo.png';
 
 interface InventoryItem {
@@ -435,7 +436,7 @@ export default function InventoryCardsRegistry() {
       <div className="flex flex-wrap justify-between items-center gap-6 mb-12 no-print">
         <div className="flex gap-4">
           <button 
-            onClick={() => navigate('/equipment')}
+            onClick={() => navigate(ROUTES.EQUIPMENT)}
             className="group flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-[24px] font-black shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
           >
             <Plus size={20} className="group-hover:rotate-90 transition-transform duration-500" />

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 import { 
   Atom, 
   Map, 
@@ -14,21 +15,21 @@ const scientificModules = [
     desc: 'استكشاف تفاعلي للجدول الدوري والمعلومات الكيميائية الأساسية للمواد.', 
     icon: Atom, 
     color: 'bg-indigo-100 text-indigo-700', 
-    path: '/periodic-table' 
+    path: ROUTES.PERIODIC_TABLE 
   },
   { 
     title: 'أدوات الكيمياء', 
     desc: 'موازن المعادلات، حاسبة الكتلة المولية، وجداول الذوبانية المتطورة وغيرها.', 
     icon: Binary, 
     color: 'bg-emerald-100 text-emerald-700', 
-    path: '/chemistry-tools' 
+    path: ROUTES.CHEMISTRY_TOOLS 
   },
   { 
     title: 'الخريطة التربوية', 
     desc: 'توزيع التجهيزات والمخابر التعليمية والموارد العلمية للمؤسسة.', 
     icon: Map, 
     color: 'bg-tertiary-container/30', 
-    path: '/educational-map' 
+    path: ROUTES.EDUCATIONAL_MAP 
   }
 ];
 

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 import { 
   ShieldAlert, 
   Trash2, 
@@ -14,21 +15,21 @@ const safetyModules = [
     desc: 'متابعة سجل الحوادث، المعدات وطفيات الحريق.', 
     icon: ShieldAlert, 
     color: 'bg-error/10 text-error', 
-    path: '/safety' 
+    path: ROUTES.SAFETY 
   },
   { 
     title: 'إدارة النفايات الكيميائية', 
     desc: 'نظام للتعامل مع المواد المنتهية والمهملة وفق بروتوكولات التحييد.', 
     icon: Trash2, 
     color: 'bg-surface-container-high', 
-    path: '/chemical-waste' 
+    path: ROUTES.CHEMICAL_WASTE 
   },
   { 
     title: 'دليل السلامة', 
     desc: 'دليل شامل لإجراءات الأمن والسلامة في المخابر المدرسية.', 
     icon: LifeBuoy, 
     color: 'bg-primary/10', 
-    path: '/safety-guide' 
+    path: ROUTES.SAFETY_GUIDE 
   }
 ];
 

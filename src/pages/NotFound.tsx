@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Home, AlertTriangle } from 'lucide-react';
 import { motion } from 'motion/react';
+import { ROUTES } from '../config/routes';
 
 export default function NotFound() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function NotFound() {
         </p>
         
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate(ROUTES.HOME)}
           className="mt-8 px-8 py-4 bg-primary text-on-primary rounded-2xl font-black flex items-center gap-3 hover:bg-primary-container hover:shadow-xl transition-all w-full justify-center"
         >
           <Home size={20} />

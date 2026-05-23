@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 import { 
   FlaskConical, 
   Beaker, 
@@ -29,84 +30,84 @@ const inventoryModules = [
     desc: 'تتبع المحاليل، تواريخ الصلاحية، ودرجات الخطورة Safety Data.', 
     icon: FlaskConical, 
     color: 'bg-primary/10', 
-    path: '/chemicals' 
+    path: ROUTES.CHEMICALS 
   },
   { 
     title: 'بطاقات الجرد', 
     desc: 'سجل رسمي لبطاقات الجرد يتضمن الأرقام التسلسلية والمراجعات العشرية.', 
     icon: Database, 
     color: 'bg-primary/20', 
-    path: '/inventory-cards' 
+    path: ROUTES.INVENTORY_CARDS 
   },
   { 
     title: 'الزجاجيات والعتاد', 
     desc: 'قاعدة بيانات شاملة للأجهزة والمعدات الزجاجية والميكانيكية.', 
     icon: Beaker, 
     color: 'bg-secondary-container/50', 
-    path: '/equipment' 
+    path: ROUTES.EQUIPMENT 
   },
   { 
     title: 'مصفوفة التوافق', 
     desc: 'قواعد تخزين المواد الكيميائية وتفادي التفاعلات الخطرة.', 
     icon: ShieldCheck, 
     color: 'bg-surface-container-high', 
-    path: '/chemical-storage' 
+    path: ROUTES.CHEMICAL_STORAGE 
   },
   { 
     title: 'جرد التجهيزات التقنية', 
     desc: 'واجهة عرض للأجهزة الحساسة تظهر حالة المعايرة.', 
     icon: Monitor, 
     color: 'bg-tertiary-container/20', 
-    path: '/tech-inventory' 
+    path: ROUTES.TECH_INVENTORY 
   },
   { 
     title: 'جرد المستهلكات و SDS', 
     desc: 'سجل متقدم يربط كل مادة مستهلكة بملف بيانات السلامة الخاص بها.', 
     icon: Package, 
     color: 'bg-surface-container-low', 
-    path: '/consumables-sds' 
+    path: ROUTES.CONSUMABLES_SDS 
   },
   { 
     title: 'جرد الزجاجيات والكسور', 
     desc: 'سجل متتابع للأدوات الزجاجية وحساب القيمة المالية للفواقد والكسور.', 
     icon: Beaker, 
     color: 'bg-primary/5', 
-    path: '/glassware-breakage' 
+    path: ROUTES.GLASSWARE_BREAKAGE 
   },
   { 
     title: 'إدارة النفايات الكيميائية', 
     desc: 'نظام للتعامل مع المواد المنتهية وفق بروتوكولات التحييد.', 
     icon: Trash2, 
     color: 'bg-error-container text-on-error-container', 
-    path: '/chemical-waste' 
+    path: ROUTES.CHEMICAL_WASTE 
   },
   { 
     title: 'الصيانة والإصلاح', 
     desc: 'سجلات صيانة الأجهزة المعطلة وطلبات التصليح.', 
     icon: Wrench, 
     color: 'bg-surface-container-high', 
-    path: '/maintenance' 
+    path: ROUTES.MAINTENANCE 
   },
   { 
     title: 'إسقاط التجهيزات', 
     desc: 'إسقاط وتكهين فني للمعدات التالفة وغير القابلة للإصلاح.', 
     icon: Trash2, 
     color: 'bg-error-container text-on-error-container', 
-    path: '/scrapping' 
+    path: ROUTES.SCRAPPING 
   },
   { 
     title: 'إعارة الوسائل', 
     desc: 'إدارة وتوثيق طلبات الإعارة بين الأقسام والمخابر.', 
     icon: RefreshCw, 
     color: 'bg-primary/10', 
-    path: '/loan-request' 
+    path: ROUTES.LOAN_REQUEST 
   },
   { 
     title: 'مركز الطباعة (QR)', 
     desc: 'توليد وطباعة ملصقات QR Code لكافة المواد والأجهزة.', 
     icon: Printer, 
     color: 'bg-secondary-container/50 text-secondary', 
-    path: '/qr-print-center' 
+    path: ROUTES.QR_PRINT_CENTER 
   },
 ];
 
@@ -160,7 +161,7 @@ export default function InventoryDashboard() {
             المساعد البصري الذكي
           </button>
           <button 
-            onClick={() => navigate('/')}
+            onClick={() => navigate(ROUTES.HOME)}
             className="bg-surface-container-lowest text-primary px-8 py-4 rounded-full text-[0.875rem] font-bold flex items-center gap-3 shadow-ambient hover:shadow-ambient-hover hover:-translate-y-[2px] transition-all duration-300 ease-out active:scale-95"
           >
             <ArrowLeft size={20} />
@@ -316,7 +317,7 @@ export default function InventoryDashboard() {
                       <button 
                         onClick={() => {
                            setIsScannerOpen(false);
-                           navigate('/inventory');
+                           navigate(ROUTES.INVENTORY_DASHBOARD);
                         }}
                         className="flex-1 py-5 bg-primary text-on-primary rounded-full font-black shadow-xl shadow-primary/20 hover:scale-105 transition-all text-center"
                       >

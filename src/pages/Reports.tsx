@@ -3,6 +3,7 @@ import { useSchool } from '../context/SchoolContext';
 import { addDoc, serverTimestamp, getDocs } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType, getUserCollection } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 import { 
   FileText, 
   Users, 
@@ -211,7 +212,7 @@ export default function Reports() {
       {/* Actions */}
       <div className="flex justify-center gap-8 pb-12">
         <button 
-          onClick={() => navigate('/daily-report')}
+          onClick={() => navigate(ROUTES.DAILY_REPORT)}
           className="bg-surface text-primary border-2 border-primary/20 font-black py-5 px-10 rounded-full shadow-xl hover:bg-primary/5 hover:border-primary transition-all flex items-center gap-4 active:scale-95"
         >
           <FileText size={22} />

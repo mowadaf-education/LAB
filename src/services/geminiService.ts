@@ -6,6 +6,12 @@ const GEMINI_MODEL = "gemini-2.0-flash";
 const GEMINI_MODEL_VISION = "gemini-1.5-flash"; // للصور والمحادثة
 // ────────────────────────────────────────────────────────────────────────────
 
+
+function sanitizeInput(input: string, maxLength: number = 1000): string {
+  if (!input) return "";
+  return input.slice(0, maxLength).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 async function callGeminiAPI(reqBody: any) {
   const res = await fetch('/api/gemini', {
     method: 'POST',
@@ -51,7 +57,7 @@ export async function getChemicalIntelligence(name: string, retries = 5, delay =
     const callGemini = httpsCallable(functions, 'generateContent');
     const response = await callGemini({
       model: GEMINI_MODEL,
-      contents: `Provide detailed chemical information for: "${name}". 
+      contents: `Provide detailed chemical information for: \`<input>\${sanitizeInput(name, 200)}</input>\`. 
       Return the data in JSON format with the following fields:
       - nameEn: English name
       - nameAr: Arabic name
@@ -144,7 +150,7 @@ export async function analyzeChemicalStorage(inventory: any[], retries = 3, dela
     const callGemini = httpsCallable(functions, 'generateContent');
     
     // Format the inventory slightly to save tokens
-    const compactInventory = inventory.map(c => ({
+    const compactInventory = inventory.slice(0, 150).map(c => ({
       nameEn: c.nameEn,
       nameAr: c.nameAr,
       hazardClass: c.hazardClass,
@@ -298,7 +304,7 @@ export async function analyzeMaintenance(logs: any[], retries = 3, delay = 5000)
 
     const callGemini = httpsCallable(functions, 'generateContent');
     
-    const compactLogs = logs.map(l => ({
+    const compactLogs = logs.slice(0, 100).map((l: any) => ({
       equipmentName: l.equipmentName,
       issue: l.issue,
       status: l.status,
@@ -380,7 +386,7 @@ export async function findSmartForm(query: string, availableForms: {title: strin
       The user is asking for a specific document, form, or process.
       Match their request to one of the available forms.
       
-      User query: "${query}"
+      User query: "${sanitizeInput(query, 500)}"
       
       Available Forms:
       ${JSON.stringify(availableForms)}
@@ -428,7 +434,7 @@ export async function analyzePedagogicalTracking(entries: any[], retries = 3, de
     const callGemini = httpsCallable(functions, 'generateContent');
     
     // Format lightly to save tokens
-    const compactEntries = entries.map(e => ({
+    const compactEntries = entries.slice(0, 100).map((e: any) => ({
       subject: e.subject,
       level: e.level,
       branch: e.branch,
@@ -574,7 +580,7 @@ export async function chatWithLabAssistant(messages: { role: 'user' | 'model', p
     - Keep responses concise but helpful.
     `;
 
-    const contents = messages.map(m => `${m.role === 'user' ? 'User' : 'Model'}: ${m.parts}`).join('\n');
+    const contents = messages.slice(-10).map(m => `${m.role === 'user' ? 'User' : 'Model'}: ${sanitizeInput(m.parts, 2000)}`).join('\n');
     const fullPrompt = `${systemPrompt}\n\nConversation history:\n${contents}\n\nModel response:`;
 
     const result = await callGemini({

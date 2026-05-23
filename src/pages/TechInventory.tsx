@@ -23,6 +23,7 @@ import { onSnapshot, query, where } from 'firebase/firestore';
 import { getUserCollection, handleFirestoreError, OperationType } from '../firebase';
 import { useSchool } from '../context/SchoolContext';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 
 interface Equipment {
   id: string;
@@ -190,7 +191,7 @@ export default function TechInventory({ isNested = false }: { isNested?: boolean
               <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-outline" size={20} />
             </div>
             <button 
-              onClick={() => navigate('/equipment')}
+              onClick={() => navigate(ROUTES.EQUIPMENT)}
               className="bg-primary text-on-primary w-14 h-14 rounded-full font-black flex items-center justify-center shadow-2xl shadow-primary/30 hover:bg-primary-container transition-all active:scale-95"
             >
               <Plus size={28} />
@@ -320,7 +321,7 @@ export default function TechInventory({ isNested = false }: { isNested?: boolean
                       المواصفات الكاملة
                     </button>
                     <button 
-                      onClick={() => navigate(`/equipment?id=${device.id}`)}
+                      onClick={() => navigate(`${ROUTES.EQUIPMENT}?id=${device.id}`)}
                       className="w-14 h-14 flex items-center justify-center rounded-full bg-surface border-2 border-primary/10 text-primary hover:bg-primary hover:text-white transition-all active:scale-95 shadow-sm"
                     >
                       <Settings size={20} />
@@ -334,7 +335,7 @@ export default function TechInventory({ isNested = false }: { isNested?: boolean
 
         {/* Add New Card */}
         <button 
-          onClick={() => navigate('/equipment')}
+          onClick={() => navigate(ROUTES.EQUIPMENT)}
           className="group bg-surface-container-low/50 border-4 border-dashed border-outline/10 rounded-[40px] p-12 flex flex-col items-center justify-center gap-6 hover:bg-surface-container-low transition-all duration-500 min-h-[500px]"
         >
           <div className="w-20 h-20 rounded-[28px] bg-surface flex items-center justify-center text-primary shadow-xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">

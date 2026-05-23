@@ -45,6 +45,7 @@ import {
 } from 'firebase/auth';
 import { doc, getDoc, setDoc, writeBatch, serverTimestamp, getDocFromServer } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ROUTES } from '../config/routes';
 import * as XLSX from 'xlsx';
 import { cn } from '../lib/utils';
 import LocationCard, { InstitutionSuggestion } from '../components/LocationCard';
@@ -1242,7 +1243,7 @@ export default function SettingsPage() {
                         قم بحماية بياناتك من خلال إنشاء نسخ احتياطية دورية. يمكنك تحميل قاعدة البيانات بالكامل بصيغة JSON.
                       </p>
                       <div className="pt-4 flex gap-3">
-                        <Link to="/backup" className="flex-1 bg-primary text-white py-3 rounded-xl font-bold text-center hover:opacity-90 transition-all">
+                        <Link to={ROUTES.BACKUP_CENTER} className="flex-1 bg-primary text-white py-3 rounded-xl font-bold text-center hover:opacity-90 transition-all">
                           مركز النسخ
                         </Link>
                         <button 

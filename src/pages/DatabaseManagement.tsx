@@ -18,6 +18,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { db, auth, getUserCollection, handleFirestoreError, OperationType } from '../firebase';
+import { ROUTES } from '../config/routes';
 import { 
   getDocs, 
   writeBatch, 
@@ -136,7 +137,7 @@ export default function DatabaseManagement() {
       <header className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
           <div className="flex items-center gap-2 text-primary mb-2">
-            <Link to="/settings" className="p-2 hover:bg-primary/10 rounded-full transition-colors">
+            <Link to={ROUTES.SETTINGS} className="p-2 hover:bg-primary/10 rounded-full transition-colors">
               <ChevronLeft size={24} />
             </Link>
             <h2 className="text-4xl font-black tracking-tight">إدارة قاعدة البيانات</h2>
@@ -267,7 +268,7 @@ export default function DatabaseManagement() {
             </button>
 
             <Link 
-              to="/backup"
+              to={ROUTES.BACKUP_CENTER}
               className="w-full flex items-center justify-between p-5 bg-surface-container-low hover:bg-primary/5 rounded-2xl border border-outline/5 transition-all group"
             >
               <div className="flex items-center gap-4">

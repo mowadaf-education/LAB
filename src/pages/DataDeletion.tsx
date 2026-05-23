@@ -1,6 +1,7 @@
 import React from 'react';
 import { Trash2, ShieldAlert, Lock, ArrowRight, Mail, HelpCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 
 export default function DataDeletion() {
   return (
@@ -68,7 +69,7 @@ export default function DataDeletion() {
         </div>
 
         <div className="mt-16 pt-10 border-t border-outline/10 text-center">
-          <Link to="/login" className="inline-flex items-center gap-3 text-primary font-black hover:underline">
+          <Link to={ROUTES.LOGIN} className="inline-flex items-center gap-3 text-primary font-black hover:underline">
             <ArrowRight size={20} /> العودة لصفحة تسجيل الدخول
           </Link>
         </div>

@@ -3,6 +3,7 @@ import { useSchool } from '../context/SchoolContext';
 import { BookOpen, CheckCircle2, AlertCircle, ArrowLeft, Plus, Download, Filter, Search, MoreVertical, Trash2, Edit2, TrendingUp, FileText, Calendar, ExternalLink, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 import { cn } from '../lib/utils';
 import { CURRICULUM_DB } from '../data/curriculumData';
 import { onSnapshot, query } from 'firebase/firestore';
@@ -422,7 +423,7 @@ export default function PedagogicalTracking() {
             تعديل المواقيت
           </button>
           <button 
-            onClick={() => navigate('/pedagogical')}
+            onClick={() => navigate(ROUTES.PEDAGOGICAL_DASHBOARD)}
             className="bg-surface text-primary border border-outline/10 px-8 py-4 rounded-[32px] font-black flex items-center gap-3 shadow-xl hover:bg-primary/5 transition-all active:scale-95"
           >
             <ArrowLeft size={24} />

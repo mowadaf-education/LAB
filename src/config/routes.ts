@@ -1,0 +1,67 @@
+export const ROUTES = {
+  HOME: '/',
+  DASHBOARD: '/',
+  
+  // Main Dashboards
+  INVENTORY_DASHBOARD: '/inventory',
+  PEDAGOGICAL_DASHBOARD: '/pedagogical',
+  SAFETY_HUB: '/safety-hub',
+  SCIENTIFIC_HUB: '/scientific-hub',
+  SETTINGS_HUB: '/settings-hub',
+  ADMIN: '/admin',
+
+  // Inventory & Stock
+  CHEMICALS: '/chemicals',
+  EQUIPMENT: '/equipment',
+  INVENTORY_CARDS: '/inventory-cards',
+  CHEMICAL_STORAGE: '/chemical-storage',
+  TECH_INVENTORY: '/tech-inventory',
+  CONSUMABLES_SDS: '/consumables-sds',
+  GLASSWARE_BREAKAGE: '/glassware-breakage',
+  CHEMICAL_WASTE: '/chemical-waste',
+  MAINTENANCE: '/maintenance',
+  SCRAPPING: '/scrapping',
+  LOAN_REQUEST: '/loan-request',
+  QR_PRINT_CENTER: '/qr-print-center',
+
+  // Pedagogical
+  DAILY_REPORT: '/daily-report',
+  TEACHERS: '/teachers',
+  TIMETABLE: '/timetable',
+  LAB_SCHEDULE: '/lab-schedule',
+  PEDAGOGICAL_TRACKING: '/pedagogical-tracking',
+  FOLLOW_UP_REGISTRY: '/follow-up-registry',
+  STUDENT_GROUPS: '/student-groups',
+  EDUCATIONAL_MAP: '/educational-map',
+  SMART_FORMS: '/smart-forms',
+  ACTIVITY_REQUEST: '/activity-request',
+  SYNC: '/sync',
+  LAB_EXPERIMENTS: '/lab-experiments',
+
+  // Resources & Tools
+  CALCULATORS: '/calculators',
+  LAB_ASSISTANT: '/lab-assistant',
+  PERIODIC_TABLE: '/periodic-table',
+  CHEMISTRY_TOOLS: '/chemistry-tools',
+  DOCUMENT_LIBRARY: '/document-library',
+  SCHOOL_LEGISLATION: '/school-legislation',
+  SAFETY_GUIDE: '/safety-guide',
+  SAFETY: '/safety',
+  ARCHIVE: '/archive',
+
+  // Management
+  SETTINGS: '/settings',
+  BACKUP_CENTER: '/backup-center',
+  BUDGET_PURCHASES: '/budget-purchases',
+  PROFESSIONAL_EXAMS: '/professional-exams',
+  IMPORTANT_LINKS: '/important-links',
+  SUPPORT: '/support',
+  REPORTS: '/reports',
+  LOGIN: '/login',
+  PRIVACY_POLICY: '/privacy-policy',
+  DATA_DELETION: '/data-deletion',
+  TERMS_OF_SERVICE: '/terms-of-service',
+  DIAGNOSTIC: '/diagnostic',
+  DESIGN_SYSTEM: '/design-system',
+  DATABASE_MANAGEMENT: '/database-management',
+};
